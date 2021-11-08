@@ -24,12 +24,14 @@ def extract_data(response, names):
     """
     for name in names:
         data = []
+        print(f"extracting {name}.dat..." if VERBOSE else "")
         with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
             for line in zip_ref.open(f"ml-1m/{name}.dat"):
-                data.append(str(line, "utf-8").replace("::", "\t"))
+                data.append(str(line, "latin-1").replace("::", "\t"))
         os.makedirs("data", exist_ok=True)
         with open(f"data/{name}.tsv", "w") as f:
             f.writelines(data)
+        print("done." if VERBOSE else "")
 
 
 def perform_loading():
@@ -37,9 +39,9 @@ def perform_loading():
     Perform data loading
     :return:
     """
-    print("download data" if VERBOSE else "")
+    print("download data..." if VERBOSE else "")
     response = requests.get(urls["movielens1m"])
-    print("data downloaded..." if VERBOSE else "")
-    extract_data(response, ["ratings"])
+    print("done." if VERBOSE else "")
+    extract_data(response, ["ratings", "users", "movies"])
 
 
