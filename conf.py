@@ -7,6 +7,10 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
-from load_data import perform_loading
 
-perform_loading()
+urls = {
+    "movielens1m": "http://files.grouplens.org/datasets/movielens/ml-1m.zip"
+}
+
+VERBOSE = True
+
