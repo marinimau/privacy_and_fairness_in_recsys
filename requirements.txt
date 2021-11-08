@@ -1,2 +1,5 @@
 requests
 jupyter
+pandas
+numpy
+sklearn
