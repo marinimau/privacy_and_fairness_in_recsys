@@ -3,5 +3,3 @@ jupyter
 pandas
 numpy
 sklearn
-textmining
-nltk
