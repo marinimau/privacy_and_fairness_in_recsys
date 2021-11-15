@@ -1,0 +1,10 @@
+- experiments on recommendations: top 10-20-50
+- experiments on embeddings BPR
+- balanced accuracy, uc, precision, recall, f-measure
+- grid search
+
+- write uses case / attack model  for every level of the pipeline
+    - observations
+    - embeddings
+    - relevance
+    - recommendations
