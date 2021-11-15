@@ -1,0 +1,7 @@
+dataset, accuracy
+Ratings, 0.9828036112416393
+Ratings (no score), 0.9379496972302483
+Recommendations MostPop, 0.9379496972302483
+Recommendations UserKNN, 0.7733995584988963
+Recommendations ItemKNN, 0.7609381898454746
+Recommendations BPRMF, 0.6786975717439293
