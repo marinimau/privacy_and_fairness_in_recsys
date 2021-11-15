@@ -3,3 +3,4 @@ jupyter
 pandas
 numpy
 sklearn
+matplotlib

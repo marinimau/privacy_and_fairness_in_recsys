@@ -1,0 +1,5 @@
+Ratings, 0.9830268976848195
+Recommendations MostPop, 0.2341280353200883
+Recommendations UserKNN, 0.5362030905077263
+Recommendations ItemKNN, 0.4923399558498896
+Recommendations BPRMF, 0.30309050772626933
