@@ -76,6 +76,7 @@ def validate_dataset(dataset_name):
     :param dataset_name: the name of the dataset
     :return:
     """
+    print(dataset_name)
     assert(dataset_name in conf.dataset_names)
 
 
@@ -88,6 +89,6 @@ def get_file_name(classifier_name, label_name):
     """
     validate_classifier(classifier_name)
     validate_label(label_name)
-    return str('../results/' + label_name + '_inference_' + classifier_name + '.csv')
+    return str('./results/' + label_name + '_inference_' + classifier_name + '.csv')
 
 

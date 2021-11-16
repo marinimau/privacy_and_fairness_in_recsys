@@ -14,32 +14,43 @@ urls = {
 
 classifiers = ['random-forest', 'logistic-regression']
 
-best = [5, 10, 20]
+best = [10, 20, 50]
+
+recs_file_names = [
+    'user-knn',
+    'item-knn',
+    'most-pop',
+    'bprmf',
+]
 
 dataset_names = [
     'observation',
     'observation-no-score',
     'most-pop_relevance',
-    'most-pop_classification_best_5',
     'most-pop_classification_best_10',
     'most-pop_classification_best_20',
+    'most-pop_classification_best_50',
     'item-knn_relevance',
-    'item-knn_classification_best_5',
     'item-knn_classification_best_10',
     'item-knn_classification_best_20',
+    'item-knn_classification_best_50',
     'user-knn_relevance',
-    'user-knn_classification_best_5',
     'user-knn_classification_best_10',
     'user-knn_classification_best_20',
+    'user-knn_classification_best_50',
     'bprmf_relevance',
-    'bprmf-knn_classification_best_5',
-    'bprmf-knn_classification_best_10',
-    'bprmf-knn_classification_best_20',
+    'bprmf_classification_best_10',
+    'bprmf_classification_best_20',
+    'bprmf_classification_best_50',
 ]
 
-label_names = ['age', 'gender']
+label_names = ['gender', 'age']
 
 metrics = ['balanced_accuracy_score', 'f1_score', 'precision_score', 'recall_score', 'roc_auc_score']
 
+metrics_not_binary = ['accuracy']
+
 VERBOSE = True
+
+DEBUG = False
 
