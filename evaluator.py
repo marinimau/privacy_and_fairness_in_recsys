@@ -7,17 +7,21 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
-from sklearn.metrics import balanced_accuracy_score, f1_score, precision_score, recall_score, roc_auc_score
+from sklearn.metrics import accuracy_score, balanced_accuracy_score, f1_score, precision_score, recall_score, roc_auc_score
 
 
-def get_evaluation_metrics(y_test, y_pred):
+def get_evaluation_metrics(y_test, y_pred, binary=True):
     """
     Get accuracy metrics
     :param y_test: the real y labels
     :param y_pred: the predicted y labels
+    :param binary: flag that indicates if the classification is binary
     :return: a tuple of metrics (balanced_accuracy, f1, precision, recall, roc_auc)
     """
-    return balanced_accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), precision_score(y_test,
-                                                                                              y_pred), recall_score(
-        y_test, y_pred), roc_auc_score(y_test, y_pred)
+    if binary:
+        return balanced_accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), precision_score(y_test,
+                                                                                                  y_pred), recall_score(
+            y_test, y_pred), roc_auc_score(y_test, y_pred)
+    else:
+        return accuracy_score(y_test, y_pred)
 

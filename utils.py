@@ -19,10 +19,8 @@ def init_result_file(classifier_name, label_name):
     :return:
     """
     file_name = get_file_name(classifier_name, label_name)
-    row = ['Dataset'] + conf.metrics
-    with open(file_name, 'w') as f:
-        writer = csv.writer(f)
-        writer.writerow(row)
+    f = open(file_name, "w+")
+    f.close()
 
 
 def write_metrics(classifier_name, dataset_name, label_name, metrics):

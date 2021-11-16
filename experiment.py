@@ -33,6 +33,6 @@ def run_experiment(original_data, label_name='gender'):
     y_random_forest = perform_random_forest(x_train, y_train, x_test)
     y_logistic_regression = perform_logistic_regression(x_train, y_train, x_test)
     # get evaluation metrics
-    random_forest_metrics = get_evaluation_metrics(y_test, y_random_forest)
-    logistic_regression_metrics = get_evaluation_metrics(y_test, y_logistic_regression)
+    random_forest_metrics = get_evaluation_metrics(y_test, y_random_forest, binary=(label_name == 'gender'))
+    logistic_regression_metrics = get_evaluation_metrics(y_test, y_logistic_regression, binary=(label_name == 'gender'))
     return [random_forest_metrics, logistic_regression_metrics]
