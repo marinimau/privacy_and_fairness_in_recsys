@@ -14,6 +14,8 @@ urls = {
 
 classifiers = ['random-forest', 'logistic-regression']
 
+best = [5, 10, 20]
+
 dataset_names = [
     'observation',
     'observation-no-score',

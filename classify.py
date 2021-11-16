@@ -40,6 +40,7 @@ def perform_random_forest(x_train, y_train, x_test):
     }
     grid_search = GridSearchCV(estimator=clf, param_grid=param_grid, cv=5)
     grid_search.fit(x_train, y_train.values.ravel())
+    print(grid_search.best_params_)
     y_pred = grid_search.predict(x_test)
     return y_pred
 
