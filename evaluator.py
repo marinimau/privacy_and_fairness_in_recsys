@@ -20,3 +20,4 @@ def get_evaluation_metrics(y_test, y_pred):
     return balanced_accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), precision_score(y_test,
                                                                                               y_pred), recall_score(
         y_test, y_pred), roc_auc_score(y_test, y_pred)
+
