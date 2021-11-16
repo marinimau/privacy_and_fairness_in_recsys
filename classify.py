@@ -7,7 +7,7 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 
@@ -33,9 +33,14 @@ def perform_random_forest(x_train, y_train, x_test):
     :param x_test: the x of the test set
     :return:
     """
-    clf = RandomForestClassifier(n_estimators=100)
-    clf.fit(x_train, y_train.values.ravel())
-    y_pred = clf.predict(x_test)
+    clf = RandomForestClassifier(n_jobs=-1, max_features='sqrt', n_estimators=50, oob_score=True)
+    param_grid = {
+        'n_estimators': [200, 700],
+        'max_features': ['auto', 'sqrt', 'log2']
+    }
+    grid_search = GridSearchCV(estimator=clf, param_grid=param_grid, cv=5)
+    grid_search.fit(x_train, y_train.values.ravel())
+    y_pred = grid_search.predict(x_test)
     return y_pred
 
 

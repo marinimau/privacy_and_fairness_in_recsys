@@ -23,5 +23,5 @@ def get_evaluation_metrics(y_test, y_pred, binary=True):
                                                                                                   y_pred), recall_score(
             y_test, y_pred), roc_auc_score(y_test, y_pred)
     else:
-        return accuracy_score(y_test, y_pred)
+        return [accuracy_score(y_test, y_pred)]
 

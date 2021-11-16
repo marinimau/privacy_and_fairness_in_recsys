@@ -23,7 +23,7 @@ def init_result_file(classifier_name, label_name):
     f.close()
 
 
-def write_metrics(classifier_name, dataset_name, label_name, metrics):
+def write_metrics_row(classifier_name, dataset_name, label_name, metrics):
     """
     Write results row on existing csv file
     :param classifier_name: the name of the classifier
@@ -38,6 +38,18 @@ def write_metrics(classifier_name, dataset_name, label_name, metrics):
     with open(file_name, 'a') as f:
         writer = csv.writer(f)
         writer.writerow(row)
+
+
+def write_metrics(dataset_name, label_name, metrics):
+    """
+    Write results row on existing csv file
+    :param dataset_name: the name of the dataset
+    :param label_name: the name of the label
+    :param metrics: the metrics score (list: output of evaluator.get_evaluation_metrics)
+    :return:
+    """
+    write_metrics_row(conf.classifiers[0], dataset_name, label_name, metrics[0])
+    write_metrics_row(conf.classifiers[1], dataset_name, label_name, metrics[1])
 
 
 def validate_classifier(classifier_name):
