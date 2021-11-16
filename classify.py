@@ -8,6 +8,8 @@
 #
 
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 
 def split_data(dff, test_size=0.3, random_state=698):
@@ -21,3 +23,31 @@ def split_data(dff, test_size=0.3, random_state=698):
     x = dff.iloc[:, dff.columns != 'class']
     y = dff.iloc[:, dff.columns == 'class']
     return train_test_split(x, y, test_size=test_size, random_state=random_state)
+
+
+def perform_random_forest(x_train, y_train, x_test):
+    """
+    Make predictions with Random Forest
+    :param x_train: the x of training set
+    :param y_train: the y of the training set (label)
+    :param x_test: the x of the test set
+    :return:
+    """
+    clf = RandomForestClassifier(n_estimators=100)
+    clf.fit(x_train, y_train)
+    y_pred = clf.predict(x_test)
+    return y_pred
+
+
+def perform_logistic_regression(x_train, y_train, x_test):
+    """
+    Make predictions with LogisticRegression
+    :param x_train: the x of training set
+    :param y_train: the y of the training set (label)
+    :param x_test: the x of the test set
+    :return:
+    """
+    clf = LogisticRegression()
+    clf.fit(x_train, y_train)
+    y_pred = clf.predict(x_test)
+    return y_pred
