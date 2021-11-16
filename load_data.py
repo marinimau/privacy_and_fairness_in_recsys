@@ -11,6 +11,7 @@ import zipfile
 import io
 import requests
 import os
+import pandas as pd
 
 from conf import urls, VERBOSE
 
@@ -44,4 +45,35 @@ def perform_loading():
     print("done." if VERBOSE else "")
     extract_data(response, ["ratings", "users", "movies"])
 
+
+def get_users():
+    """
+    Returns users df
+    :return: the user dataframe
+    """
+    user_df = pd.read_csv('./data/users.tsv', header=None, sep='\t')
+    user_age_df = user_df.iloc[:, : 3]
+    user_age_df.rename(columns={0: 'uid', 1: 'gender', 2: 'age'}, inplace=True)
+    user_age_df.set_index('uid')
+    return user_df
+
+
+def get_age_labels():
+    """
+    Returns the user age labels
+    :return: The user age labels
+    """
+    user_age_df = get_users().drop('gender', 1)
+    user_age_df.rename(columns={'age': 'class'}, inplace=True)
+    return user_age_df
+
+
+def get_gender_labels():
+    """
+    Returns the user gender labels
+    :return: The user gender labels
+    """
+    user_gender_df = get_users().drop('age', 1)
+    user_gender_df.rename(columns={'gender': 'class'}, inplace=True)
+    return user_gender_df
 
