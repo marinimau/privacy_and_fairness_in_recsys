@@ -35,4 +35,4 @@ def run_experiment(original_data, label_name='gender'):
     # get evaluation metrics
     random_forest_metrics = get_evaluation_metrics(y_test, y_random_forest)
     logistic_regression_metrics = get_evaluation_metrics(y_test, y_logistic_regression)
-    return random_forest_metrics, logistic_regression_metrics
+    return [random_forest_metrics, logistic_regression_metrics]

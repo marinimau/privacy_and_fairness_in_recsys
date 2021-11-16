@@ -36,7 +36,7 @@ def write_metrics(classifier_name, dataset_name, label_name, metrics):
     """
     validate_dataset(dataset_name)
     file_name = get_file_name(classifier_name, label_name)
-    row = [dataset_name] + metrics
+    row = [dataset_name] + list(metrics)
     with open(file_name, 'a') as f:
         writer = csv.writer(f)
         writer.writerow(row)
@@ -78,6 +78,6 @@ def get_file_name(classifier_name, label_name):
     """
     validate_classifier(classifier_name)
     validate_label(label_name)
-    return str('./results/' + label_name + '_inference_' + classifier_name + '.csv')
+    return str('../results/' + label_name + '_inference_' + classifier_name + '.csv')
 
 

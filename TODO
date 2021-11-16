@@ -4,7 +4,7 @@
 - grid search
 
 - write uses case / attack model  for every level of the pipeline
-    - observations
+    - observations [OK]
     - embeddings
-    - relevance
-    - recommendations
+    - relevance [OK]
+    - recommendations [OK]

@@ -34,7 +34,7 @@ def perform_random_forest(x_train, y_train, x_test):
     :return:
     """
     clf = RandomForestClassifier(n_estimators=100)
-    clf.fit(x_train, y_train)
+    clf.fit(x_train, y_train.values.ravel())
     y_pred = clf.predict(x_test)
     return y_pred
 
