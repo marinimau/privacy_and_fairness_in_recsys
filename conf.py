@@ -52,5 +52,5 @@ metrics_not_binary = ['accuracy']
 
 VERBOSE = True
 
-DEBUG = True
+DEBUG = False
 
