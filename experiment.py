@@ -14,6 +14,7 @@ from load_data import get_gender_labels, get_age_labels
 from classify import split_data, perform_random_forest, perform_logistic_regression
 from evaluator import get_evaluation_metrics
 from load_data import get_best_recs
+from preprocessing import balance_data
 from utils import write_metrics
 from conf import best
 
@@ -30,6 +31,11 @@ def run_experiment(original_data, label_name='gender'):
     user_data = get_gender_labels() if label_name == 'gender' else get_age_labels()
     # merge labels with original data
     joined_df = pd.merge(user_data, original_data, on='uid')
+    if conf.lite_dataset:
+        joined_df = joined_df.head(10000)
+    # balance data
+    if conf.balance_data and label_name == 'gender':
+        joined_df = balance_data(joined_df)
     # split in training and test set
     x_train, x_test, y_train, y_test = split_data(joined_df)
     # classify

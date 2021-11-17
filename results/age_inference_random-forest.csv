@@ -1,0 +1,16 @@
+user-knn_relevance,0.8076666666666666
+user-knn_classification_best_10,0.542
+user-knn_classification_best_20,0.699
+user-knn_classification_best_50,0.8006666666666666
+item-knn_relevance,0.7976666666666666
+item-knn_classification_best_10,0.541
+item-knn_classification_best_20,0.6623333333333333
+item-knn_classification_best_50,0.796
+most-pop_relevance,0.276
+most-pop_classification_best_10,0.23
+most-pop_classification_best_20,0.23566666666666666
+most-pop_classification_best_50,0.284
+bprmf_relevance,0.4756666666666667
+bprmf_classification_best_10,0.2856666666666667
+bprmf_classification_best_20,0.3233333333333333
+bprmf_classification_best_50,0.469

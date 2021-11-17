@@ -50,7 +50,13 @@ metrics = ['balanced_accuracy_score', 'f1_score', 'precision_score', 'recall_sco
 
 metrics_not_binary = ['accuracy']
 
+balance_data = True
+
+lite_dataset = True
+
 VERBOSE = True
 
 DEBUG = False
+
+
 
