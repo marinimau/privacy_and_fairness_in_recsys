@@ -64,7 +64,7 @@ def get_age_labels():
     :return: The user age labels
     """
     user_df = get_users()
-    user_age_df = user_df.drop('gender', 1)
+    user_age_df = user_df.drop('gender', axis=1)
     user_age_df.rename(columns={'age': 'class'}, inplace=True)
     return user_age_df
 
@@ -75,7 +75,7 @@ def get_gender_labels():
     :return: The user gender labels
     """
     user_df = get_users()
-    user_gender_df = user_df.drop('age', 1)
+    user_gender_df = user_df.drop('age', axis=1)
     user_gender_df.rename(columns={'gender': 'class'}, inplace=True)
     user_gender_df['class'].replace('F', 0, inplace=True)
     user_gender_df['class'].replace('M', 1, inplace=True)

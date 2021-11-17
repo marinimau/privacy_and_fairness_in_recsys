@@ -39,9 +39,9 @@ def perform_random_forest(x_train, y_train, x_test):
         'max_features': ['auto', 'sqrt', 'log2']
     }
     grid_search = GridSearchCV(estimator=clf, param_grid=param_grid, cv=5)
-    grid_search.fit(x_train, y_train.values.ravel())
+    grid_search.fit(x_train.values, y_train.values.ravel())
     print(grid_search.best_params_)
-    y_pred = grid_search.predict(x_test)
+    y_pred = grid_search.predict(x_test.values)
     return y_pred
 
 
@@ -54,6 +54,6 @@ def perform_logistic_regression(x_train, y_train, x_test):
     :return:
     """
     clf = LogisticRegression()
-    clf.fit(x_train, y_train)
-    y_pred = clf.predict(x_test)
+    clf.fit(x_train.values, y_train.values)
+    y_pred = clf.predict(x_test.values)
     return y_pred
