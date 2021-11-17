@@ -54,6 +54,6 @@ def perform_logistic_regression(x_train, y_train, x_test):
     :return:
     """
     clf = LogisticRegression()
-    clf.fit(x_train.values, y_train.values)
+    clf.fit(x_train.values, y_train.values.ravel())
     y_pred = clf.predict(x_test.values)
     return y_pred

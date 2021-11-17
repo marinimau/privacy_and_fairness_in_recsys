@@ -77,8 +77,8 @@ def get_gender_labels():
     user_df = get_users()
     user_gender_df = user_df.drop('age', axis=1)
     user_gender_df.rename(columns={'gender': 'class'}, inplace=True)
-    user_gender_df['class'].replace('F', 0, inplace=True)
-    user_gender_df['class'].replace('M', 1, inplace=True)
+    user_gender_df['class'].replace('F', 1, inplace=True)
+    user_gender_df['class'].replace('M', 0, inplace=True)
     return user_gender_df
 
 
