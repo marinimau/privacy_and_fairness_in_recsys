@@ -52,7 +52,7 @@ metrics_not_binary = ['accuracy']
 
 balance_data = True
 
-lite_dataset = True
+lite_dataset = False
 
 VERBOSE = True
 
