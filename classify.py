@@ -10,6 +10,7 @@
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+import conf
 
 
 def split_data(dff, test_size=0.3, random_state=698):
@@ -40,7 +41,8 @@ def perform_random_forest(x_train, y_train, x_test):
     }
     grid_search = GridSearchCV(estimator=clf, param_grid=param_grid, cv=5)
     grid_search.fit(x_train.values, y_train.values.ravel())
-    print(grid_search.best_params_)
+    if conf.VERBOSE:
+        print(grid_search.best_params_)
     y_pred = grid_search.predict(x_test.values)
     return y_pred
 

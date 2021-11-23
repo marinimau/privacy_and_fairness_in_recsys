@@ -1,6 +1,8 @@
 - explain because we obtain some type of prediction using a given classifier
 - make a plot like "The Bias-Variance trade-off"
 
+- experiments for observation phase
+- experiments for embeddings phase
 
 - for each recommendation model show performance in each step of the pipeline
 - for a single phase of the pipeline compare different recommendation model
@@ -13,3 +15,8 @@
 
 
 - experiments on embeddings
+
+
+https://github.com/d-vet-ml4ed/mlbd/blob/main/Tutorials/Tutorial04/Notebooks/Model_Selection.ipynb
+
+https://scikit-learn.org/stable/modules/learning_curve.html

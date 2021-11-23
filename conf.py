@@ -54,7 +54,11 @@ balance_data = True
 
 lite_dataset = False
 
+classifier_evaluation_plot = True
+
 VERBOSE = True
+
+SHOW_PLOT = False
 
 DEBUG = False
 
