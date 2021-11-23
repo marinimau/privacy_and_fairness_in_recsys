@@ -54,13 +54,13 @@ balance_data = True
 
 lite_dataset = True
 
-lite_dataset_size = 100
+lite_dataset_size = 10000
 
-classifier_evaluation_plot = True
+classifier_evaluation_plot = False
 
 VERBOSE = True
 
-SHOW_PLOT = True
+SHOW_PLOT = False
 
 DEBUG = False
 

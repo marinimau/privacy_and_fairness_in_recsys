@@ -32,7 +32,7 @@ def run_experiment(original_data, label_name='gender'):
     # merge labels with original data
     joined_df = pd.merge(user_data, original_data, on='uid')
     if conf.lite_dataset:
-        joined_df = joined_df.head(conf.lite_dataset_size)
+        joined_df = joined_df.sample(n=conf.lite_dataset_size)
     # balance data
     if conf.balance_data and label_name == 'gender':
         joined_df = balance_data(joined_df)
@@ -47,7 +47,21 @@ def run_experiment(original_data, label_name='gender'):
     return [random_forest_metrics, logistic_regression_metrics]
 
 
-def experiment_automation(dataset, label):
+def observation_experiment(label):
+    """
+    auto run observation experiments
+    :param label: the label name
+    :return:
+    """
+    # interactions
+    df = pd.read_csv('./data/ratings.tsv', header=None, sep='\t')
+    df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
+    df.set_index('uid')
+    metrics = get_metrics_from_classifier(df, label)
+    write_metrics(label_name=label, dataset_name='observation', metrics=metrics)
+
+
+def recs_experiment(dataset, label):
     """
     auto run experiments
     :param dataset: the dataset name
@@ -56,7 +70,7 @@ def experiment_automation(dataset, label):
     """
     # ratings
     df = pd.read_csv('./recs/' + dataset + '.tsv', header=None, sep='\t')
-    df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
+    df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating'}, inplace=True)
     df.set_index('uid')
     # relevance
     relevance_dataset = dataset + '_relevance'

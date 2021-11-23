@@ -8,7 +8,7 @@
 #
 
 from conf import label_names, recs_file_names
-from experiment import experiment_automation
+from experiment import recs_experiment, observation_experiment
 
 
 def main():
@@ -17,8 +17,9 @@ def main():
     :return:
     """
     for label in label_names:
+        observation_experiment(label)
         for dataset in recs_file_names:
-            experiment_automation(dataset, label)
+            recs_experiment(dataset, label)
 
 
 if __name__ == '__main__':
