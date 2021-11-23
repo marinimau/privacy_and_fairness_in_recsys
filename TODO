@@ -9,6 +9,8 @@
 
 - one metric for each plot
 
+------------------------------------------------------------------------------------------------------------------------
+
 - plot
     - validation curve: show overfitting
     - learning curve:

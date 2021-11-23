@@ -7,9 +7,14 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
+import numpy as np
+
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
 import conf
 from inspector import ClassifierTradeOffInspector
 
@@ -48,7 +53,9 @@ def perform_random_forest(x_train, y_train, x_test):
     if conf.classifier_evaluation_plot:
         best_clf = RandomForestClassifier(n_estimators=grid_search.best_params_['n_estimators'],
                                           max_features=grid_search.best_params_['max_features'])
-        c = ClassifierTradeOffInspector(best_clf, x_train, y_train.values.ravel(), "prova")
+        c = ClassifierTradeOffInspector(best_clf, x_train, y_train.values.ravel(), "prova",
+                                        param_name='n_estimators',
+                                        param_range=np.arange(200, 700, 100))
         del c
     return y_pred
 
@@ -61,9 +68,12 @@ def perform_logistic_regression(x_train, y_train, x_test):
     :param x_test: the x of the test set
     :return:
     """
-    clf = LogisticRegression()
+    clf = LogisticRegression(solver='lbfgs', penalty='l2', max_iter=10000, random_state=1)
     clf.fit(x_train.values, y_train.values.ravel())
-    #if conf.classifier_evaluation_plot:
-    #    ClassifierTradeOffInspector(LogisticRegression(), x_train, y_train, "prova_l")
+    param_range = [0.001, 0.05, 0.1, 0.5, 1.0, 10.0]
     y_pred = clf.predict(x_test.values)
+    if conf.classifier_evaluation_plot:
+        c = ClassifierTradeOffInspector(LogisticRegression(), x_train, y_train.values.ravel(), "prova_l",
+                                        param_name='C', param_range=param_range)
+        del c
     return y_pred
