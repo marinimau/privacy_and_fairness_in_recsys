@@ -72,15 +72,14 @@ class ClassifierTradeOffInspector:
         plt.subplot(211)
         plt.title('Validation curve')
         self.__perform_subplot(self.vc_train_score, self.vc_val_score)
-
         # learning curve
         plt.subplot(212)
         plt.title('Learning curve')
         self.__perform_subplot(self.lc_train_score, self.lc_val_score)
-
         plt.savefig('results/trade-off/' + str(self.__experiment_title) + '.pdf')
         if conf.SHOW_PLOT:
             plt.show()
+        plt.close()
 
     def __perform_subplot(self, train_score, val_score):
         """

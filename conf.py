@@ -52,7 +52,9 @@ metrics_not_binary = ['accuracy']
 
 balance_data = True
 
-lite_dataset = False
+lite_dataset = True
+
+lite_dataset_size = 100
 
 classifier_evaluation_plot = True
 

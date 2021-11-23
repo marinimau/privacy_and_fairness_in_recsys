@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 import conf
+from inspector import ClassifierTradeOffInspector
 
 
 def split_data(dff, test_size=0.3, random_state=698):
@@ -44,6 +45,11 @@ def perform_random_forest(x_train, y_train, x_test):
     if conf.VERBOSE:
         print(grid_search.best_params_)
     y_pred = grid_search.predict(x_test.values)
+    if conf.classifier_evaluation_plot:
+        best_clf = RandomForestClassifier(n_estimators=grid_search.best_params_['n_estimators'],
+                                          max_features=grid_search.best_params_['max_features'])
+        c = ClassifierTradeOffInspector(best_clf, x_train, y_train.values.ravel(), "prova")
+        del c
     return y_pred
 
 
@@ -57,5 +63,7 @@ def perform_logistic_regression(x_train, y_train, x_test):
     """
     clf = LogisticRegression()
     clf.fit(x_train.values, y_train.values.ravel())
+    #if conf.classifier_evaluation_plot:
+    #    ClassifierTradeOffInspector(LogisticRegression(), x_train, y_train, "prova_l")
     y_pred = clf.predict(x_test.values)
     return y_pred
