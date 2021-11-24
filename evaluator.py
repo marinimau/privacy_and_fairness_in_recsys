@@ -21,9 +21,9 @@ def get_evaluation_metrics(y_test, y_pred, binary=True):
     :return: a tuple of metrics (balanced_accuracy, f1, precision, recall, roc_auc)
     """
     if binary:
-        return balanced_accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), precision_score(y_test,
-                                                                                                  y_pred), recall_score(
-            y_test, y_pred), roc_auc_score(y_test, y_pred)
+        return balanced_accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), \
+               precision_score(y_test, y_pred, zero_division=1), \
+               recall_score(y_test, y_pred), roc_auc_score(y_test, y_pred)
     else:
         return balanced_accuracy_score(y_test, y_pred), f1_score(y_test, y_pred, average='weighted'), \
                precision_score(y_test, y_pred, average='weighted', zero_division=1), \
