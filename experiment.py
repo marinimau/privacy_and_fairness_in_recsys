@@ -32,7 +32,7 @@ def run_experiment(original_data, label_name='gender'):
     # merge labels with original data
     joined_df = pd.merge(user_data, original_data, on='uid')
     if conf.lite_dataset:
-        joined_df = joined_df.sample(n=conf.lite_dataset_size)
+        joined_df = joined_df.head(conf.lite_dataset_size)
     # balance data
     if conf.balance_data and label_name == 'gender':
         joined_df = balance_data(joined_df)
