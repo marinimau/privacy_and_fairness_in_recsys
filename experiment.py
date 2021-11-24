@@ -29,13 +29,13 @@ def run_experiment(original_data, label_name='gender'):
     assert label_name in conf.label_names
     # get labels
     user_data = get_gender_labels() if label_name == 'gender' else get_age_labels()
+    # balance data
+    if conf.balance_data and label_name == 'gender':
+        user_data = balance_data(user_data)
     # merge labels with original data
     joined_df = pd.merge(user_data, original_data, on='uid')
     if conf.lite_dataset:
         joined_df = joined_df.head(conf.lite_dataset_size)
-    # balance data
-    if conf.balance_data and label_name == 'gender':
-        joined_df = balance_data(joined_df)
     # split in training and test set
     x_train, x_test, y_train, y_test = split_data(joined_df)
     # classify

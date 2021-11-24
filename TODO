@@ -4,9 +4,6 @@
 - experiments for embeddings phase
 
 
-- for a single phase of the pipeline compare different recommendation model
-
-- one metric for each plot
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -14,6 +11,7 @@
 - experiments for observation phase [OK]
 
 - for each recommendation model show performance in each step of the pipeline [OK]
+- for a single phase of the pipeline compare different recommendation model [OK]
 
 - plot
     - validation curve: show overfitting [OK]

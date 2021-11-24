@@ -63,9 +63,12 @@ def get_age_labels():
     Returns the user age labels
     :return: The user age labels
     """
+    def to_string(x):
+        return str(x)
     user_df = get_users()
     user_age_df = user_df.drop('gender', axis=1)
     user_age_df.rename(columns={'age': 'class'}, inplace=True)
+    user_age_df['class'] = user_age_df['class'].apply(to_string)
     return user_age_df
 
 

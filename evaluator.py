@@ -7,7 +7,9 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
-from sklearn.metrics import accuracy_score, balanced_accuracy_score, f1_score, precision_score, recall_score, roc_auc_score
+from sklearn.metrics import balanced_accuracy_score, f1_score, precision_score, recall_score, roc_auc_score
+
+import conf
 
 
 def get_evaluation_metrics(y_test, y_pred, binary=True):
@@ -23,5 +25,7 @@ def get_evaluation_metrics(y_test, y_pred, binary=True):
                                                                                                   y_pred), recall_score(
             y_test, y_pred), roc_auc_score(y_test, y_pred)
     else:
-        return [accuracy_score(y_test, y_pred)]
-
+        return balanced_accuracy_score(y_test, y_pred), f1_score(y_test, y_pred, average='weighted'), \
+               precision_score(y_test, y_pred, average='weighted', zero_division=1), \
+               recall_score(y_test, y_pred, average='weighted'), \
+               0 # roc_auc_score(y_test, y_pred, multi_class='ovo', average='macro', labels=conf.gender_labels)
