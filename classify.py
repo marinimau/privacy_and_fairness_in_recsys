@@ -12,8 +12,6 @@ import numpy as np
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
 
 import conf
 from inspector import ClassifierTradeOffInspector
@@ -51,9 +49,11 @@ def perform_random_forest(x_train, y_train, x_test):
         print(grid_search.best_params_)
     y_pred = grid_search.predict(x_test.values)
     if conf.classifier_evaluation_plot:
+        inspector_file_name = conf.current_trade_off_file_name + 'random_forest.pdf'
         best_clf = RandomForestClassifier(n_estimators=grid_search.best_params_['n_estimators'],
                                           max_features=grid_search.best_params_['max_features'])
         c = ClassifierTradeOffInspector(best_clf, x_train, y_train.values.ravel(), "prova",
+                                        file_name=inspector_file_name,
                                         param_name='n_estimators',
                                         param_range=np.arange(200, 700, 100))
         del c
@@ -73,7 +73,8 @@ def perform_logistic_regression(x_train, y_train, x_test):
     param_range = [0.001, 0.05, 0.1, 0.5, 1.0, 10.0]
     y_pred = clf.predict(x_test.values)
     if conf.classifier_evaluation_plot:
+        inspector_file_name = conf.current_trade_off_file_name + 'logistic_regression.pdf'
         c = ClassifierTradeOffInspector(LogisticRegression(), x_train, y_train.values.ravel(), "prova_l",
-                                        param_name='C', param_range=param_range)
+                                        param_name='C', param_range=param_range, file_name=inspector_file_name)
         del c
     return y_pred

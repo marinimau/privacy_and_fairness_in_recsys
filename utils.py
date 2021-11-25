@@ -92,3 +92,15 @@ def get_file_name(classifier_name, label_name):
     return str('./results/' + label_name + '_inference_' + classifier_name + '.csv')
 
 
+def get_inspector_file_name(dataset_name, label_name):
+    """
+    get the file name given the name of the classifier and the name of the class
+    :param dataset_name: the name of the dataset
+    :param label_name: the name of the class
+    :return:
+    """
+    # validate_dataset(dataset_name)
+    validate_label(label_name)
+    return str('./results/trade-off/' + dataset_name + '_' + label_name + '_inference_')
+
+

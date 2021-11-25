@@ -93,6 +93,6 @@ def get_metrics_from_classifier(df, label):
     :return:
     """
     if conf.DEBUG:
-        return [(0, 0, 0, 0, 0), (0, 0, 0, 0, 0)] if label == 'gender' else [[0], [0]]
+        return [(0, 0, 0, 0, 0), (0, 0, 0, 0, 0)]
     else:
         return run_experiment(df, label)

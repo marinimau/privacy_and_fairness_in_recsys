@@ -23,7 +23,7 @@ class ClassifierTradeOffInspector:
     __lc_train_score = []
     __lc_val_score = []
 
-    def __init__(self, classifier, x_train, y_train, experiment_title, param_name, param_range):
+    def __init__(self, classifier, x_train, y_train, experiment_title, param_name, param_range, file_name):
         """
         Init
         :param classifier: the classifier
@@ -32,6 +32,7 @@ class ClassifierTradeOffInspector:
         :param experiment_title: the title of the experiment
         :param param_name: the name of the param
         :param param_range: a range of values for the param
+        :param file_name: the name of the file for the output
         """
         self.__classifier = classifier
         self.__x_train = x_train
@@ -39,10 +40,12 @@ class ClassifierTradeOffInspector:
         self.__experiment_title = experiment_title
         self.__param_range = param_range
         self.__param_name = param_name
+        self.__file_name = file_name
 
         self.__generate_validation_curve()
         self.__generate_learning_curve()
-        self.__perform_plot()
+
+        self.perform_plot()
 
     def __generate_validation_curve(self):
         """
@@ -63,7 +66,7 @@ class ClassifierTradeOffInspector:
         _, self.lc_train_score, self.lc_val_score = model_selection.learning_curve(self.__classifier, self.__x_train,
                                                                                    self.__y_train)
 
-    def __perform_plot(self):
+    def perform_plot(self):
         """
         Perform curve plot
         :return:
@@ -77,7 +80,7 @@ class ClassifierTradeOffInspector:
         plt.title('Learning curve')
         print(self.__param_range)
         # self.__perform_subplot(self.lc_train_score, self.lc_val_score, self.__param_range)
-        plt.savefig('results/trade-off/' + str(self.__experiment_title) + '.pdf')
+        plt.savefig(str(self.__file_name))
         if conf.SHOW_PLOT:
             plt.show()
         plt.close()

@@ -54,17 +54,19 @@ metrics_not_binary = ['accuracy']
 
 balance_data = True
 
-lite_dataset = False
+lite_dataset = True
 
 lite_dataset_size = 10000
 
-classifier_evaluation_plot = False
+classifier_evaluation_plot = True
 
 VERBOSE = True
 
 SHOW_PLOT = False
 
 DEBUG = False
+
+current_trade_off_file_name = ''
 
 
 

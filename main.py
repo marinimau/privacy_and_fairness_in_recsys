@@ -7,8 +7,9 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
-from conf import label_names, recs_file_names
+import conf
 from experiment import recs_experiment, observation_experiment
+from utils import get_inspector_file_name
 
 
 def main():
@@ -16,9 +17,11 @@ def main():
     main
     :return:
     """
-    for label in label_names:
+    for label in conf.label_names:
+        conf.current_trade_off_file_name = get_inspector_file_name('observation', label)
         observation_experiment(label)
-        for dataset in recs_file_names:
+        for dataset in conf.recs_file_names:
+            conf.current_trade_off_file_name = get_inspector_file_name(dataset, label)
             recs_experiment(dataset, label)
 
 
