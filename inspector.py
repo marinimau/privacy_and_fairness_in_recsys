@@ -56,7 +56,7 @@ class ClassifierTradeOffInspector:
                                                                                   self.__y_train,
                                                                                   param_name=self.__param_name,
                                                                                   param_range=self.__param_range,
-                                                                                  scoring='f1')
+                                                                                  scoring='balanced_accuracy')
 
     def __generate_learning_curve(self):
         """
@@ -64,7 +64,8 @@ class ClassifierTradeOffInspector:
         :return:
         """
         _, self.lc_train_score, self.lc_val_score = model_selection.learning_curve(self.__classifier, self.__x_train,
-                                                                                   self.__y_train)
+                                                                                   self.__y_train,
+                                                                                   scoring='balanced_accuracy')
 
     def perform_plot(self):
         """
@@ -79,7 +80,7 @@ class ClassifierTradeOffInspector:
         plt.subplot(212)
         plt.title('Learning curve')
         print(self.__param_range)
-        # self.__perform_subplot(self.lc_train_score, self.lc_val_score, self.__param_range)
+        self.__perform_subplot(self.lc_train_score, self.lc_val_score, self.__param_range)
         plt.savefig(str(self.__file_name))
         if conf.SHOW_PLOT:
             plt.show()
@@ -94,10 +95,10 @@ class ClassifierTradeOffInspector:
         :return:
         """
         plt.tight_layout()
-        plt.plot(param_range, np.median(train_score, 1), color='blue', label='training score')
-        plt.plot(param_range, np.median(val_score, 1), color='red', label='validation score')
+        plt.plot(np.median(train_score, 1), color='blue', label='training score')
+        plt.plot(np.median(val_score, 1), color='red', label='validation score')
         plt.legend(loc='best')
-        plt.ylim(0, 1)
-        plt.xlim(2, param_range[-1])
-        plt.xlabel(self.__param_name)
-        plt.ylabel('accuracy')
+        # plt.ylim(0, 1)
+        # plt.xlim(2, param_range[-1])
+        # plt.xlabel(self.__param_name)
+        plt.ylabel('balanced_accuracy')
