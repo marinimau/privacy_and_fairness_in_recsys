@@ -54,7 +54,7 @@ metrics_not_binary = ['accuracy']
 
 balance_data = True
 
-lite_dataset = True
+lite_dataset = False
 
 lite_dataset_size = 10000
 
