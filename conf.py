@@ -17,7 +17,7 @@ classifiers = ['random-forest', 'logistic-regression']
 best = [10, 20, 50]
 
 recs_file_names = [
-    'user-knn',
+    'user-knn-weights',
     'item-knn',
     'most-pop',
     'bprmf',
