@@ -37,7 +37,6 @@ def merge_data(user_df, features_df, on_recs=False):
     :return:
     """
     if not on_recs:
-        # merged_data = pd.merge(user_df, features_df, on='uid')
         features_df = features_df.pivot(index='uid', columns='movie_id', values='rating').fillna(0)
         merged_data = pd.merge(features_df, user_df, on='uid')
     else:
@@ -61,7 +60,8 @@ def merge_embeddings(user_df, features_df):
     :param features_df: the features df
     :return:
     """
-    features_df.replace([np.inf, -np.inf], np.nan, inplace=True)
+    features_df.replace([np.inf], 9, inplace=True)
+    features_df.replace([-np.inf], -9, inplace=True)
     features_df = features_df.fillna(0)
     merged_data = pd.merge(features_df, user_df, left_index=True, right_index=True)
     merged_data.columns = merged_data.columns.astype(str)

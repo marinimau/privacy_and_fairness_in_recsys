@@ -74,7 +74,8 @@ def perform_logistic_regression(x_train, y_train, x_test):
     y_pred = clf.predict(x_test.values)
     if conf.classifier_evaluation_plot:
         inspector_file_name = conf.current_trade_off_file_name + 'logistic_regression.pdf'
-        c = ClassifierTradeOffInspector(LogisticRegression(), x_train, y_train.values.ravel(), "prova_l",
+        c = ClassifierTradeOffInspector(LogisticRegression(solver='lbfgs', max_iter=300), x_train,
+                                        y_train.values.ravel(), "prova_l",
                                         param_name='C', param_range=param_range, file_name=inspector_file_name)
         del c
     return y_pred
