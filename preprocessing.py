@@ -9,6 +9,7 @@
 
 
 import pandas as pd
+import numpy as np
 
 
 def balance_data(df):
@@ -36,9 +37,9 @@ def merge_data(user_df, features_df, on_recs=False):
     :return:
     """
     if not on_recs:
-        merged_data = pd.merge(user_df, features_df, on='uid')
-        merged_data = merged_data.pivot(index='uid', columns='movie_id', values='rating').fillna(0)
-        merged_data = pd.merge(merged_data, user_df, on='uid')
+        # merged_data = pd.merge(user_df, features_df, on='uid')
+        features_df = features_df.pivot(index='uid', columns='movie_id', values='rating').fillna(0)
+        merged_data = pd.merge(features_df, user_df, on='uid')
     else:
         features_df.drop(columns='rating', inplace=True)
         features_df = features_df.groupby('uid')
@@ -52,3 +53,16 @@ def merge_data(user_df, features_df, on_recs=False):
     merged_data.columns = merged_data.columns.astype(str)
     return merged_data
 
+
+def merge_embeddings(user_df, features_df):
+    """
+    Merge embeddings data
+    :param user_df: the user dataframe
+    :param features_df: the features df
+    :return:
+    """
+    features_df.replace([np.inf, -np.inf], np.nan, inplace=True)
+    features_df = features_df.fillna(0)
+    merged_data = pd.merge(features_df, user_df, left_index=True, right_index=True)
+    merged_data.columns = merged_data.columns.astype(str)
+    return merged_data

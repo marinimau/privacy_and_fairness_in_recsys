@@ -99,7 +99,6 @@ def get_inspector_file_name(dataset_name, label_name):
     :param label_name: the name of the class
     :return:
     """
-    # validate_dataset(dataset_name)
     validate_label(label_name)
     return str('./results/trade-off/' + dataset_name + '_' + label_name + '_inference_')
 

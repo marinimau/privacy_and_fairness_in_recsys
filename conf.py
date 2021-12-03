@@ -17,7 +17,7 @@ classifiers = ['random-forest', 'logistic-regression']
 best = [10, 20, 50]
 
 recs_file_names = [
-    'user-knn-weights',
+    'user-knn',
     'item-knn',
     'most-pop',
     'bprmf',
@@ -27,18 +27,22 @@ dataset_names = [
     'observation',
     'observation-no-score',
     'most-pop_relevance',
+    'most-pop_embeddings',
     'most-pop_classification_best_10',
     'most-pop_classification_best_20',
     'most-pop_classification_best_50',
     'item-knn_relevance',
+    'item-knn_embeddings',
     'item-knn_classification_best_10',
     'item-knn_classification_best_20',
     'item-knn_classification_best_50',
     'user-knn_relevance',
+    'user-knn_embeddings',
     'user-knn_classification_best_10',
     'user-knn_classification_best_20',
     'user-knn_classification_best_50',
     'bprmf_relevance',
+    'bprmf_embeddings',
     'bprmf_classification_best_10',
     'bprmf_classification_best_20',
     'bprmf_classification_best_50',
@@ -67,6 +71,3 @@ SHOW_PLOT = False
 DEBUG = False
 
 current_trade_off_file_name = ''
-
-
-

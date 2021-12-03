@@ -8,7 +8,7 @@
 #
 
 import conf
-from experiment import recs_experiment, observation_experiment
+from experiment import recs_experiment, observation_experiment, embedding_experiments
 from utils import get_inspector_file_name
 
 
@@ -22,9 +22,9 @@ def main():
         observation_experiment(label)
         for dataset in conf.recs_file_names:
             conf.current_trade_off_file_name = get_inspector_file_name(dataset, label)
+            embedding_experiments(dataset, label)
             recs_experiment(dataset, label)
 
 
 if __name__ == '__main__':
     main()
-

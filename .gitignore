@@ -1,3 +1,6 @@
 # Project exclude paths
 /venv/
-/data/
+/data/*.tsv
+/data/*.csv
+/embeddings/*.csv
+/results/trade-off/*.pdf

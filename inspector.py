@@ -75,30 +75,27 @@ class ClassifierTradeOffInspector:
         # validation curve
         plt.subplot(211)
         plt.title('Validation curve')
-        self.__perform_subplot(self.vc_train_score, self.vc_val_score, self.__param_range)
+        self.__perform_subplot(self.vc_train_score, self.vc_val_score)
         # learning curve
         plt.subplot(212)
         plt.title('Learning curve')
         print(self.__param_range)
-        self.__perform_subplot(self.lc_train_score, self.lc_val_score, self.__param_range)
+        self.__perform_subplot(self.lc_train_score, self.lc_val_score)
         plt.savefig(str(self.__file_name))
         if conf.SHOW_PLOT:
             plt.show()
         plt.close()
 
-    def __perform_subplot(self, train_score, val_score, param_range):
+    @staticmethod
+    def __perform_subplot(train_score, val_score):
         """
         Perform subplot
         :param train_score: the train score
         :param val_score: the validation score
-        :param param_range: the range for the x axis
         :return:
         """
         plt.tight_layout()
         plt.plot(np.median(train_score, 1), color='blue', label='training score')
         plt.plot(np.median(val_score, 1), color='red', label='validation score')
         plt.legend(loc='best')
-        # plt.ylim(0, 1)
-        # plt.xlim(2, param_range[-1])
-        # plt.xlabel(self.__param_name)
         plt.ylabel('balanced_accuracy')
