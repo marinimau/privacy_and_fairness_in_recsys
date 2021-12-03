@@ -19,11 +19,11 @@ def main():
     """
     for label in conf.label_names:
         conf.current_trade_off_file_name = get_inspector_file_name('observation', label)
-        # observation_experiment(label)
+        observation_experiment(label)
         for dataset in conf.recs_file_names:
             conf.current_trade_off_file_name = get_inspector_file_name(dataset, label)
             embedding_experiments(dataset, label)
-            # recs_experiment(dataset, label)
+            recs_experiment(dataset, label)
 
 
 if __name__ == '__main__':
