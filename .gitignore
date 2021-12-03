@@ -3,4 +3,3 @@
 /data/*.tsv
 /data/*.csv
 /embeddings/*.csv
-/results/trade-off/*.pdf
