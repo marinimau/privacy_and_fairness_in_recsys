@@ -39,12 +39,13 @@ def run_experiment(original_data, label_name='gender', embeddings=False):
     # split in training and test set
     x_train, x_test, y_train, y_test = split_data(joined_df)
     # classify
-    y_random_forest = perform_random_forest(x_train, y_train, x_test)
-    y_logistic_regression = perform_logistic_regression(x_train, y_train, x_test)
+    y_random_forest, training_time_rf, prediction_time_rf = perform_random_forest(x_train, y_train, x_test)
+    y_logistic_regression, training_time_lr, prediction_time_lr = perform_logistic_regression(x_train, y_train, x_test)
     # get evaluation metrics
     random_forest_metrics = get_evaluation_metrics(y_test, y_random_forest, binary=(label_name == 'gender'))
     logistic_regression_metrics = get_evaluation_metrics(y_test, y_logistic_regression, binary=(label_name == 'gender'))
-    return [random_forest_metrics, logistic_regression_metrics]
+    return [random_forest_metrics, logistic_regression_metrics, (training_time_rf, prediction_time_rf),
+            (training_time_lr, prediction_time_lr)]
 
 
 def observation_experiment(label):
@@ -114,6 +115,6 @@ def get_metrics_from_classifier(df, label, embeddings=False):
     :return:
     """
     if conf.DEBUG or df is None:
-        return [(0, 0, 0, 0, 0), (0, 0, 0, 0, 0)]
+        return [(0, 0, 0, 0, 0), (0, 0, 0, 0, 0), (0, 0), (0, 0)]
     else:
         return run_experiment(df, label, embeddings)

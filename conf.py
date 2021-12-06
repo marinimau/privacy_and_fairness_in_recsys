@@ -48,21 +48,21 @@ dataset_names = [
     'bprmf_classification_best_50',
 ]
 
-label_names = ['age', 'gender']
+label_names = ['gender', 'age']
 
 gender_labels = ['1', '56', '25', '45', '50', '35', '18']
 
-metrics = ['balanced_accuracy_score', 'f1_score', 'precision_score', 'recall_score', 'roc_auc_score']
+metrics = ['balanced_accuracy_score', 'f1_score', 'precision_score', 'recall_score', 'accuracy_score']
 
 metrics_not_binary = ['accuracy']
 
 balance_data = True
 
-lite_dataset = False
+lite_dataset = True
 
-lite_dataset_size = 1000
+lite_dataset_size = 100
 
-classifier_evaluation_plot = True
+classifier_evaluation_plot = False
 
 VERBOSE = True
 

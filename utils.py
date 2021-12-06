@@ -23,17 +23,18 @@ def init_result_file(classifier_name, label_name):
     f.close()
 
 
-def write_metrics_row(classifier_name, dataset_name, label_name, metrics):
+def write_metrics_row(classifier_name, dataset_name, label_name, metrics, time=False):
     """
     Write results row on existing csv file
     :param classifier_name: the name of the classifier
     :param dataset_name: the name of the dataset
     :param label_name: the name of the label
     :param metrics: the metrics score (list: output of evaluator.get_evaluation_metrics)
+    :param time: a flag that indicates that we are writing time row
     :return:
     """
     validate_dataset(dataset_name)
-    file_name = get_file_name(classifier_name, label_name)
+    file_name = get_file_name(classifier_name, label_name, time=time)
     row = [dataset_name] + list(metrics)
     with open(file_name, 'a') as f:
         writer = csv.writer(f)
@@ -50,6 +51,8 @@ def write_metrics(dataset_name, label_name, metrics):
     """
     write_metrics_row(conf.classifiers[0], dataset_name, label_name, metrics[0])
     write_metrics_row(conf.classifiers[1], dataset_name, label_name, metrics[1])
+    write_metrics_row(conf.classifiers[0], dataset_name, label_name, metrics[2], time=True)
+    write_metrics_row(conf.classifiers[1], dataset_name, label_name, metrics[3], time=True)
 
 
 def validate_classifier(classifier_name):
@@ -80,16 +83,18 @@ def validate_dataset(dataset_name):
     assert(dataset_name in conf.dataset_names)
 
 
-def get_file_name(classifier_name, label_name):
+def get_file_name(classifier_name, label_name, time=False):
     """
     get the file name given the name of the classifier and the name of the class
     :param classifier_name: the name of the classifier
     :param label_name: the name of the class
+    :param time: a flag that indicates that we are writing time row
     :return:
     """
     validate_classifier(classifier_name)
     validate_label(label_name)
-    return str('./results/' + label_name + '_inference_' + classifier_name + '.csv')
+    base_directory = './results/' if not time else './results/time/'
+    return str(base_directory + label_name + '_inference_' + classifier_name + '.csv')
 
 
 def get_inspector_file_name(dataset_name, label_name):
