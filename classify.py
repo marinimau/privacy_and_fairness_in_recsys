@@ -7,12 +7,9 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
-import numpy as np
 import time
 
 from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
 
 import conf
 from inspector import ClassifierTradeOffInspector
@@ -31,23 +28,18 @@ def split_data(dff, test_size=0.3, random_state=698):
     return train_test_split(x, y, test_size=test_size, random_state=random_state)
 
 
-def perform_random_forest(x_train, y_train, x_test):
+def perform_classification(x_train, y_train, x_test, classifier_name):
     """
-    Make predictions with Random Forest
+    Make predictions with LogisticRegression
     :param x_train: the x of training set
     :param y_train: the y of the training set (label)
     :param x_test: the x of the test set
+    :param classifier_name: the classifier
     :return:
     """
-    clf = RandomForestClassifier(n_jobs=-1, max_features='sqrt', n_estimators=50, oob_score=True)
-    param_grid = {
-        'n_estimators': [200, 700],
-        'max_features': ['auto', 'sqrt', 'log2', None],
-        'n_jobs': [-1],
-        'min_samples_leaf': [4, 40, 100, 200],
-        'random_state': [101, 698]
-    }
-    grid_search = GridSearchCV(estimator=clf, param_grid=param_grid, cv=5)
+    param_grid = conf.classifier_params[classifier_name]
+    clf = conf.classifier_models[classifier_name]
+    grid_search = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10)
     start = time.time()
     grid_search.fit(x_train.values, y_train.values.ravel())
     end = time.time()
@@ -59,39 +51,20 @@ def perform_random_forest(x_train, y_train, x_test):
     end = time.time()
     prediction_time = end - start
     if conf.classifier_evaluation_plot:
-        inspector_file_name = conf.current_trade_off_file_name + 'random_forest.pdf'
-        best_clf = RandomForestClassifier(n_estimators=grid_search.best_params_['n_estimators'],
-                                          max_features=grid_search.best_params_['max_features'])
-        c = ClassifierTradeOffInspector(best_clf, x_train, y_train.values.ravel(), "prova",
-                                        file_name=inspector_file_name,
-                                        param_name='n_estimators',
-                                        param_range=np.arange(200, 700, 100))
-        del c
+        perform_classifier_evaluation_plot(classifier_name, x_train, y_train)
     return y_pred, training_time, prediction_time
 
 
-def perform_logistic_regression(x_train, y_train, x_test):
+def perform_classifier_evaluation_plot(classifier_name, x_train, y_train):
     """
-    Make predictions with LogisticRegression
-    :param x_train: the x of training set
-    :param y_train: the y of the training set (label)
-    :param x_test: the x of the test set
-    :return:
+    Perform classification evaluation plot
+    :param classifier_name: the name of the classifier
+    :param x_train: the features of the training set
+    :param y_train: the label of the training set
     """
-    clf = LogisticRegression(solver='lbfgs', penalty='l2', max_iter=10000, random_state=1)
-    start = time.time()
-    clf.fit(x_train.values, y_train.values.ravel())
-    end = time.time()
-    training_time = end - start
-    start = time.time()
-    y_pred = clf.predict(x_test.values)
-    end = time.time()
-    prediction_time = end - start
-    param_range = [0.001, 0.05, 0.1, 0.5, 1.0, 10.0]
-    if conf.classifier_evaluation_plot:
-        inspector_file_name = conf.current_trade_off_file_name + 'logistic_regression.pdf'
-        c = ClassifierTradeOffInspector(LogisticRegression(solver='lbfgs', max_iter=300), x_train,
-                                        y_train.values.ravel(), "prova_l",
-                                        param_name='C', param_range=param_range, file_name=inspector_file_name)
-        del c
-    return y_pred, training_time, prediction_time
+    clf = conf.classifier_models[classifier_name]
+    param_name = conf.trade_off_param_name[classifier_name]
+    param_range = conf.trade_off_param_range[classifier_name]
+    inspector_file_name = conf.current_trade_off_file_name + classifier_name + '.pdf'
+    ClassifierTradeOffInspector(clf, x_train, y_train.values.ravel(), classifier_name, file_name=inspector_file_name,
+                                param_name=param_name, param_range=param_range)

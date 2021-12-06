@@ -7,12 +7,48 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
+import numpy as np
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 urls = {
     "movielens1m": "http://files.grouplens.org/datasets/movielens/ml-1m.zip"
 }
 
 classifiers = ['random-forest', 'logistic-regression']
+
+classifier_models = {
+    "random_forest": RandomForestClassifier(),
+    "logistic_regression": LogisticRegression(),
+
+}
+
+classifier_params = {
+    'random_forest': {
+        'n_estimators': [200, 700],
+        'max_features': ['auto', 'sqrt', 'log2', None],
+        'n_jobs': [-1],
+        'min_samples_leaf': [4, 40, 100, 200],
+        'random_state': [101, 698]
+    },
+    'logistic_regression': {
+        'solver': ['lbfgs'],
+        'penalty': ['l2'],
+        'max_iter': [10000],
+        'random_state': [1],
+    }
+}
+
+trade_off_param_range = {
+    'random_forest': np.arange(200, 700, 100),
+    'logistic_regression': [0.001, 0.05, 0.1, 0.5, 1.0, 10.0]
+}
+
+trade_off_param_name = {
+    'random_forest': 'n_estimators',
+    'logistic_regression': 'C'
+}
 
 best = [10, 20, 50]
 
@@ -62,7 +98,7 @@ lite_dataset = True
 
 lite_dataset_size = 100
 
-classifier_evaluation_plot = False
+classifier_evaluation_plot = True
 
 VERBOSE = True
 

@@ -12,7 +12,7 @@ import pandas as pd
 import numpy as np
 
 from load_data import get_gender_labels, get_age_labels
-from classify import split_data, perform_random_forest, perform_logistic_regression
+from classify import split_data, perform_classification
 from evaluator import get_evaluation_metrics, get_confusion_matrix
 from load_data import get_best_recs
 from preprocessing import balance_data, merge_data, merge_embeddings
@@ -40,8 +40,10 @@ def run_experiment(original_data, label_name='gender', embeddings=False):
     # split in training and test set
     x_train, x_test, y_train, y_test = split_data(joined_df)
     # classify
-    y_random_forest, training_time_rf, prediction_time_rf = perform_random_forest(x_train, y_train, x_test)
-    y_logistic_regression, training_time_lr, prediction_time_lr = perform_logistic_regression(x_train, y_train, x_test)
+    y_random_forest, training_time_rf, prediction_time_rf = perform_classification(x_train, y_train, x_test,
+                                                                                   'random_forest')
+    y_logistic_regression, training_time_lr, prediction_time_lr = perform_classification(x_train, y_train, x_test,
+                                                                                         'logistic_regression')
     # get evaluation metrics
     random_forest_metrics = get_evaluation_metrics(y_test, y_random_forest, binary=(label_name == 'gender'))
     logistic_regression_metrics = get_evaluation_metrics(y_test, y_logistic_regression, binary=(label_name == 'gender'))

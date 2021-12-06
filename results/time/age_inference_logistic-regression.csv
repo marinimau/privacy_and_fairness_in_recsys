@@ -41,3 +41,9 @@ bprmf_relevance,0,0
 bprmf_classification_best_10,0,0
 bprmf_classification_best_20,0,0
 bprmf_classification_best_50,0,0
+observation,2.712336301803589,0.010788679122924805
+user-knn_embeddings,2.4596469402313232,0.007080078125
+user-knn_relevance,1.8673298358917236,0.006700038909912109
+user-knn_classification_best_10,1.0909879207611084,0.003525972366333008
+user-knn_classification_best_20,1.4703140258789062,0.00471806526184082
+user-knn_classification_best_50,2.2247471809387207,0.02751302719116211
