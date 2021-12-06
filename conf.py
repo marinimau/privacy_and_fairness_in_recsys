@@ -33,10 +33,9 @@ classifier_params = {
         'random_state': [101, 698]
     },
     'logistic_regression': {
-        'solver': ['lbfgs'],
         'penalty': ['l2'],
-        'max_iter': [10000],
-        'random_state': [1],
+        'C': [1.0],
+        'random_state': [np.random.RandomState(0)],
     }
 }
 
@@ -94,7 +93,7 @@ metrics_not_binary = ['accuracy']
 
 balance_data = True
 
-lite_dataset = True
+lite_dataset = False
 
 lite_dataset_size = 100
 
