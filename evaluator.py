@@ -7,12 +7,13 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
-from sklearn.metrics import balanced_accuracy_score, f1_score, precision_score, recall_score, accuracy_score
+from sklearn.metrics import balanced_accuracy_score, f1_score, precision_score, recall_score, accuracy_score, \
+    confusion_matrix
 
 
 def get_evaluation_metrics(y_test, y_pred, binary=True):
     """
-    Get accuracy metrics
+    Get evaluation metrics
     :param y_test: the real y labels
     :param y_pred: the predicted y labels
     :param binary: flag that indicates if the classification is binary
@@ -26,3 +27,12 @@ def get_evaluation_metrics(y_test, y_pred, binary=True):
         return balanced_accuracy_score(y_test, y_pred), f1_score(y_test, y_pred, average='weighted'), \
                precision_score(y_test, y_pred, average='weighted', zero_division=1), \
                recall_score(y_test, y_pred, average='weighted'), accuracy_score(y_test, y_pred)
+
+
+def get_confusion_matrix(y_test, y_pred):
+    """
+    Get confusion matrix
+    :param y_test: the real y labels
+    :param y_pred: the predicted y labels
+    """
+    return confusion_matrix(y_test, y_pred)

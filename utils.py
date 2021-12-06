@@ -7,8 +7,10 @@
 #   Credits: @marinimau (https://github.com/marinimau)
 #
 
-import conf
+import numpy as np
 import csv
+
+import conf
 
 
 def init_result_file(classifier_name, label_name):
@@ -41,6 +43,20 @@ def write_metrics_row(classifier_name, dataset_name, label_name, metrics, time=F
         writer.writerow(row)
 
 
+def write_confusion_matrix(classifier_name, dataset_name, label_name, confusion_matrix):
+    """
+    Write results confusion matrix in a file
+    :param classifier_name: the name of the classifier
+    :param dataset_name: the name of the dataset
+    :param label_name: the name of the label
+    :param confusion_matrix: the metrics score (list: output of evaluator.get_evaluation_metrics)
+    :return:
+    """
+    validate_dataset(dataset_name)
+    file_path = get_confusion_matrix_file_name(dataset_name, label_name, classifier_name)
+    np.savetxt(file_path, confusion_matrix, delimiter=',', fmt='%i')
+
+
 def write_metrics(dataset_name, label_name, metrics):
     """
     Write results row on existing csv file
@@ -53,6 +69,8 @@ def write_metrics(dataset_name, label_name, metrics):
     write_metrics_row(conf.classifiers[1], dataset_name, label_name, metrics[1])
     write_metrics_row(conf.classifiers[0], dataset_name, label_name, metrics[2], time=True)
     write_metrics_row(conf.classifiers[1], dataset_name, label_name, metrics[3], time=True)
+    write_confusion_matrix(conf.classifiers[0], dataset_name, label_name, metrics[4])
+    write_confusion_matrix(conf.classifiers[1], dataset_name, label_name, metrics[5])
 
 
 def validate_classifier(classifier_name):
@@ -79,8 +97,9 @@ def validate_dataset(dataset_name):
     :param dataset_name: the name of the dataset
     :return:
     """
-    print(dataset_name)
-    assert(dataset_name in conf.dataset_names)
+    if conf.VERBOSE:
+        print(dataset_name)
+    assert (dataset_name in conf.dataset_names)
 
 
 def get_file_name(classifier_name, label_name, time=False):
@@ -108,3 +127,14 @@ def get_inspector_file_name(dataset_name, label_name):
     return str('./results/trade-off/' + dataset_name + '_' + label_name + '_inference_')
 
 
+def get_confusion_matrix_file_name(dataset_name, label_name, classifier_name):
+    """
+    get the file name given the name of the classifier and the name of the class
+    :param dataset_name: the name of the dataset
+    :param label_name: the name of the class
+    :param classifier_name: the name of the classifier
+    :return:
+    """
+    validate_label(label_name)
+    return str(
+        './results/confusion_matrix/' + dataset_name + '_' + label_name + '_inference_' + classifier_name + '.txt')

@@ -9,10 +9,11 @@
 
 import conf
 import pandas as pd
+import numpy as np
 
 from load_data import get_gender_labels, get_age_labels
 from classify import split_data, perform_random_forest, perform_logistic_regression
-from evaluator import get_evaluation_metrics
+from evaluator import get_evaluation_metrics, get_confusion_matrix
 from load_data import get_best_recs
 from preprocessing import balance_data, merge_data, merge_embeddings
 from utils import write_metrics, get_inspector_file_name
@@ -45,7 +46,8 @@ def run_experiment(original_data, label_name='gender', embeddings=False):
     random_forest_metrics = get_evaluation_metrics(y_test, y_random_forest, binary=(label_name == 'gender'))
     logistic_regression_metrics = get_evaluation_metrics(y_test, y_logistic_regression, binary=(label_name == 'gender'))
     return [random_forest_metrics, logistic_regression_metrics, (training_time_rf, prediction_time_rf),
-            (training_time_lr, prediction_time_lr)]
+            (training_time_lr, prediction_time_lr), get_confusion_matrix(y_test, y_random_forest),
+            get_confusion_matrix(y_test, y_logistic_regression)]
 
 
 def observation_experiment(label):
@@ -95,7 +97,6 @@ def recs_experiment(dataset_name, label):
     relevance_dataset = dataset_name + '_relevance'
     conf.current_trade_off_file_name = get_inspector_file_name(relevance_dataset, label)
     metrics = get_metrics_from_classifier(df, label)
-
     write_metrics(label_name=label, dataset_name=relevance_dataset, metrics=metrics)
     # recs
     for i in best:
@@ -115,6 +116,6 @@ def get_metrics_from_classifier(df, label, embeddings=False):
     :return:
     """
     if conf.DEBUG or df is None:
-        return [(0, 0, 0, 0, 0), (0, 0, 0, 0, 0), (0, 0), (0, 0)]
+        return [(0, 0, 0, 0, 0), (0, 0, 0, 0, 0), (0, 0), (0, 0), np.array([0, 0, 0, 0]), np.array([0, 0, 0, 0])]
     else:
         return run_experiment(df, label, embeddings)
