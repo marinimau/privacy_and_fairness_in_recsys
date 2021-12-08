@@ -26,11 +26,9 @@ classifier_models = {
 
 classifier_params = {
     'random_forest': {
-        'n_estimators': [200, 700],
-        'max_features': ['auto', 'sqrt', 'log2', None],
-        'n_jobs': [-1],
-        'min_samples_leaf': [4, 40, 100, 200],
-        'random_state': [101, 698]
+        'bootstrap': [False],
+        'max_features': ['auto'],
+        'n_estimators': [1800]
     },
     'logistic_regression': {
         'penalty': ['l2'],

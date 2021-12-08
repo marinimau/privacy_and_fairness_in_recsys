@@ -11,8 +11,6 @@
 import pandas as pd
 import numpy as np
 
-from sklearn.preprocessing import normalize
-
 
 def balance_data(df):
     """
@@ -52,7 +50,7 @@ def merge_data(user_df, features_df, on_recs=False):
         merged_data = pd.merge(dff, user_df, on='uid')
     merged_data.astype(int)
     merged_data.columns = merged_data.columns.astype(str)
-    return normalize(merged_data)
+    return merged_data
 
 
 def merge_embeddings(user_df, features_df):
