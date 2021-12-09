@@ -26,12 +26,13 @@ classifier_models = {
 
 classifier_params = {
     'random_forest': {
-        'bootstrap': [False],
+        'bootstrap': [False, True],
         'max_features': ['auto'],
-        'n_estimators': [1800]
+        'n_estimators': [700, 1800]
     },
     'logistic_regression': {
-        'penalty': ['l2'],
+        'solver': ['lbfgs'],
+        'penalty': ['l2', None],
         'C': [1.0],
         'random_state': [np.random.RandomState(0)],
     }
