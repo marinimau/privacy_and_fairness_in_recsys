@@ -57,6 +57,13 @@ recs_file_names = [
     'bprmf',
 ]
 
+other_recs_file_names = [
+    'neumf',
+    'wrmf',
+    'lightgcn',
+    'multidae',
+]
+
 dataset_names = [
     'observation',
     'observation-no-score',
