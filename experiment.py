@@ -74,7 +74,7 @@ def embedding_experiments(dataset_name, label):
     :return:
     """
     # ratings
-    if dataset_name == 'most-pop':
+    if dataset_name in conf.ignore_embeddings:
         df = None
     else:
         df = pd.read_csv('./embeddings/' + dataset_name + '.csv', header=None)

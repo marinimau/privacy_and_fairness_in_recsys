@@ -51,13 +51,18 @@ trade_off_param_name = {
 best = [10, 20, 50]
 
 recs_file_names = [
-    'user-knn',
-    'item-knn',
-    'most-pop',
-    'bprmf',
+    #'user-knn',
+    #'item-knn',
+    #'most-pop',
+    #'bprmf',
+    'neumf',
+    'wrmf',
+    'lightgcn',
+    'multidae',
 ]
 
-other_recs_file_names = [
+ignore_embeddings = [
+    'most-pop',
     'neumf',
     'wrmf',
     'lightgcn',
@@ -87,6 +92,26 @@ dataset_names = [
     'bprmf_classification_best_10',
     'bprmf_classification_best_20',
     'bprmf_classification_best_50',
+    'neumf_relevance',
+    'neumf_embeddings',
+    'neumf_classification_best_10',
+    'neumf_classification_best_20',
+    'neumf_classification_best_50',
+    'wrmf_relevance',
+    'wrmf_embeddings',
+    'wrmf_classification_best_10',
+    'wrmf_classification_best_20',
+    'wrmf_classification_best_50',
+    'lightgcn_relevance',
+    'lightgcn_embeddings',
+    'lightgcn_classification_best_10',
+    'lightgcn_classification_best_20',
+    'lightgcn_classification_best_50',
+    'multidae_relevance',
+    'multidae_embeddings',
+    'multidae_classification_best_10',
+    'multidae_classification_best_20',
+    'multidae_classification_best_50',
 ]
 
 label_names = ['gender', 'age']
