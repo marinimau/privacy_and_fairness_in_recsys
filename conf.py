@@ -51,10 +51,10 @@ trade_off_param_name = {
 best = [10, 20, 50]
 
 recs_file_names = [
-    #'user-knn',
-    #'item-knn',
-    #'most-pop',
-    #'bprmf',
+    'user-knn',
+    'item-knn',
+    'most-pop',
+    'bprmf',
     'neumf',
     'wrmf',
     'lightgcn',
