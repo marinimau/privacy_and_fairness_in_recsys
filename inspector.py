@@ -79,7 +79,6 @@ class ClassifierTradeOffInspector:
         # learning curve
         plt.subplot(212)
         plt.title('Learning curve')
-        print(self.__param_range)
         self.__perform_subplot(self.lc_train_score, self.lc_val_score)
         plt.savefig(str(self.__file_name))
         if conf.SHOW_PLOT:
