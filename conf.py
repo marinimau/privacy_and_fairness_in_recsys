@@ -116,7 +116,7 @@ dataset_names = [
 
 label_names = ['gender', 'age']
 
-gender_labels = ['1', '56', '25', '45', '50', '35', '18']
+age_labels = ['1', '56', '25', '45', '50', '35', '18']
 
 metrics = ['balanced_accuracy_score', 'f1_score', 'precision_score', 'recall_score', 'accuracy_score']
 
