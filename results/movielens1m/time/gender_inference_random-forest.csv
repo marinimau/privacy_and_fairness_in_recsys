@@ -273,3 +273,5 @@ user-knn_classification_best_10,0,0
 user-knn_classification_best_20,0,0
 user-knn_classification_best_50,0,0
 observation,0.8634397983551025,0.023520946502685547
+observation,0.8723959922790527,0.01739501953125
+user-knn_embeddings,0.5824310779571533,0.02544999122619629

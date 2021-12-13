@@ -59,7 +59,7 @@ def observation_experiment(label):
     :return:
     """
     # interactions
-    df = pd.read_csv('./data/ratings.tsv', header=None, sep='\t')
+    df = pd.read_csv('data/' + conf.data_root + '/ratings.tsv', header=None, sep='\t')
     df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
     df.set_index('uid')
     metrics = get_metrics_from_classifier(df, label)
@@ -77,7 +77,7 @@ def embedding_experiments(dataset_name, label):
     if dataset_name in conf.ignore_embeddings:
         df = None
     else:
-        df = pd.read_csv('./embeddings/' + dataset_name + '.csv', header=None)
+        df = pd.read_csv('./embeddings/' + conf.data_root + '/' + dataset_name + '.csv', header=None)
     embeddings_dataset = dataset_name + '_embeddings'
     conf.current_trade_off_file_name = get_inspector_file_name(embeddings_dataset, label)
     metrics = get_metrics_from_classifier(df, label, embeddings=True)
@@ -92,7 +92,7 @@ def recs_experiment(dataset_name, label):
     :return:
     """
     # ratings
-    df = pd.read_csv('./recs/' + dataset_name + '.tsv', header=None, sep='\t')
+    df = pd.read_csv('./recs/' + conf.data_root + '/' + dataset_name + '.tsv', header=None, sep='\t')
     df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating'}, inplace=True)
     df.set_index('uid')
     # relevance
