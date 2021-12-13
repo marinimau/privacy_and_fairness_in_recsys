@@ -41,7 +41,7 @@ def run_experiment(original_data, label_name='gender', embeddings=False):
     x_train, x_test, y_train, y_test = split_data(joined_df)
     # classify
     y_random_forest, training_time_rf, prediction_time_rf = perform_classification(x_train, y_train, x_test,
-                                                                                   'naive_bayes')
+                                                                                   'random_forest')
     y_logistic_regression, training_time_lr, prediction_time_lr = perform_classification(x_train, y_train, x_test,
                                                                                          'logistic_regression')
     # get evaluation metrics

@@ -13,6 +13,7 @@ import requests
 import os
 import pandas as pd
 
+import conf
 from conf import urls, VERBOSE
 
 
@@ -51,7 +52,7 @@ def get_users():
     Returns users df
     :return: the user dataframe
     """
-    user_df = pd.read_csv('data/movielens1m/users.tsv', header=None, sep='\t')
+    user_df = pd.read_csv('data/' + conf.data_root + '/users.tsv', header=None, sep='\t')
     user_age_df = user_df.iloc[:, : 3]
     user_age_df.rename(columns={0: 'uid', 1: 'gender', 2: 'age'}, inplace=True)
     user_age_df.set_index('uid')
