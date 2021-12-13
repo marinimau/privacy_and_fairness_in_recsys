@@ -29,7 +29,7 @@ classifier_params = {
     'random_forest': {
         'bootstrap': [False, True],
         'max_features': ['auto'],
-        'n_estimators': [50, 100]  # 700, 1800]
+        'n_estimators': [50, 700, 1800]
     },
     'logistic_regression': {
         'solver': ['lbfgs'],
@@ -132,7 +132,7 @@ data_root_list = ['movielens1M', 'lastfm1k']
 
 data_root = data_root_list[1]
 
-balance_data = False
+balance_data = True
 
 lite_dataset = False
 
