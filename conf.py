@@ -11,6 +11,7 @@ import numpy as np
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
 
 urls = {
     "movielens1m": "http://files.grouplens.org/datasets/movielens/ml-1m.zip"
@@ -21,7 +22,7 @@ classifiers = ['random-forest', 'logistic-regression']
 classifier_models = {
     "random_forest": RandomForestClassifier(),
     "logistic_regression": LogisticRegression(),
-
+    "naive_bayes": GaussianNB()
 }
 
 classifier_params = {
@@ -35,17 +36,22 @@ classifier_params = {
         'penalty': ['l2', None],
         'C': [1.0],
         'random_state': [np.random.RandomState(0)],
+    },
+    'naive_bayes': {
+        'priors': [[0.5, 0.5]]
     }
 }
 
 trade_off_param_range = {
     'random_forest': np.arange(200, 700, 100),
-    'logistic_regression': [0.001, 0.05, 0.1, 0.5, 1.0, 10.0]
+    'logistic_regression': [0.001, 0.05, 0.1, 0.5, 1.0, 10.0],
+    'naive_bayes': [0.001, 0.05, 0.1, 0.5, 1.0, 10.0]
 }
 
 trade_off_param_name = {
     'random_forest': 'n_estimators',
-    'logistic_regression': 'C'
+    'logistic_regression': 'C',
+    'naive_bayes': 'priors'
 }
 
 best = [10, 20, 50]
