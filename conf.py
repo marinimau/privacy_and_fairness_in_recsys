@@ -140,7 +140,7 @@ VERBOSE = True
 
 SHOW_PLOT = False
 
-DEBUG = True
+DEBUG = False
 
 current_trade_off_file_name = ''
 
