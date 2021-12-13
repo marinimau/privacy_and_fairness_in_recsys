@@ -128,6 +128,10 @@ metrics = ['balanced_accuracy_score', 'f1_score', 'precision_score', 'recall_sco
 
 metrics_not_binary = ['accuracy']
 
+data_root_list = ['movielens1M', 'lastfm1k']
+
+data_root = data_root_list[0]
+
 balance_data = True
 
 lite_dataset = False
@@ -144,4 +148,6 @@ DEBUG = False
 
 current_trade_off_file_name = ''
 
-data_root = 'movielens1M'
+
+
+
