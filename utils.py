@@ -112,7 +112,7 @@ def get_file_name(classifier_name, label_name, time=False):
     """
     validate_classifier(classifier_name)
     validate_label(label_name)
-    base_directory = './results/' if not time else './results/time/'
+    base_directory = './results/' + conf.data_root + '/' if not time else './results/' + conf.data_root + '/time/'
     return str(base_directory + label_name + '_inference_' + classifier_name + '.csv')
 
 
@@ -124,7 +124,7 @@ def get_inspector_file_name(dataset_name, label_name):
     :return:
     """
     validate_label(label_name)
-    return str('./results/trade-off/' + dataset_name + '_' + label_name + '_inference_')
+    return str('./results/' + conf.data_root + '/trade-off/' + dataset_name + '_' + label_name + '_inference_')
 
 
 def get_confusion_matrix_file_name(dataset_name, label_name, classifier_name):
@@ -137,4 +137,5 @@ def get_confusion_matrix_file_name(dataset_name, label_name, classifier_name):
     """
     validate_label(label_name)
     return str(
-        './results/confusion_matrix/' + dataset_name + '_' + label_name + '_inference_' + classifier_name + '.txt')
+        './results/' + conf.data_root + '/confusion_matrix/' + dataset_name + '_' + label_name + '_inference_' +
+        classifier_name + '.txt')
