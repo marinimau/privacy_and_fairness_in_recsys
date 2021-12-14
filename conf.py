@@ -130,7 +130,7 @@ metrics_not_binary = ['accuracy']
 
 data_root_list = ['movielens1M', 'lastfm1k']
 
-data_root = data_root_list[1]
+data_root = data_root_list[0]
 
 balance_data = True
 

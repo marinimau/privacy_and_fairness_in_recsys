@@ -64,12 +64,12 @@ def get_age_labels():
     Returns the user age labels
     :return: The user age labels
     """
-    def to_string(x):
-        return str(x)
     user_df = get_users()
     user_age_df = user_df.drop('gender', axis=1)
     user_age_df.rename(columns={'age': 'class'}, inplace=True)
-    user_age_df['class'] = user_age_df['class'].apply(to_string)
+    if conf.data_root == conf.data_root_list[0]:
+        user_age_df['class'] = (user_age_df['class'] < 25)
+        print(user_age_df['class'].unique())
     return user_age_df
 
 
@@ -81,8 +81,8 @@ def get_gender_labels():
     user_df = get_users()
     user_gender_df = user_df.drop('age', axis=1)
     user_gender_df.rename(columns={'gender': 'class'}, inplace=True)
-    user_gender_df['class'].replace('F', 1, inplace=True)
-    user_gender_df['class'].replace('M', 0, inplace=True)
+    user_gender_df['class'].replace('F', True, inplace=True)
+    user_gender_df['class'].replace('M', False, inplace=True)
     return user_gender_df
 
 
