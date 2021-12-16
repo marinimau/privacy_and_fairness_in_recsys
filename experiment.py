@@ -62,6 +62,8 @@ def observation_experiment(label):
     df = pd.read_csv('data/' + conf.data_root + '/ratings.tsv', header=None, sep='\t')
     df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
     df.set_index('uid')
+    if conf.data_root == conf.data_root_list[1]:
+        df['rating'] = df['rating'].astype(int)
     metrics = get_metrics_from_classifier(df, label)
     write_metrics(label_name=label, dataset_name='observation', metrics=metrics)
 
