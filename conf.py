@@ -72,7 +72,6 @@ ignore_embeddings = [
     'neumf',
     'lightgcn',
     'multidae',
-    'item-knn',
 ]
 
 dataset_names = [
@@ -120,7 +119,7 @@ dataset_names = [
     'multidae_classification_best_50',
 ]
 
-label_names = ['age']  # , 'gender']
+label_names = ['age', 'gender']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
 
@@ -130,7 +129,7 @@ metrics_not_binary = ['accuracy']
 
 data_root_list = ['movielens1M', 'lastfm1k']
 
-data_root = data_root_list[1]
+data_root = data_root_list[0]
 
 balance_data = True
 
