@@ -1,5 +1,5 @@
 # Project exclude paths
 /venv/
-/data/*.tsv
+/data/movielens1m/*.tsv
 /data/*.csv
 /embeddings/*/*.csv

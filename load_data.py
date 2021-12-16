@@ -30,8 +30,8 @@ def extract_data(response, names):
         with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
             for line in zip_ref.open(f"ml-1m/{name}.dat"):
                 data.append(str(line, "latin-1").replace("::", "\t"))
-        os.makedirs("data", exist_ok=True)
-        with open(f"data/{name}.tsv", "w") as f:
+        os.makedirs("data/movielens1m/", exist_ok=True)
+        with open(f"data/movielens1m/{name}.tsv", "w") as f:
             f.writelines(data)
         print("done." if VERBOSE else "")
 

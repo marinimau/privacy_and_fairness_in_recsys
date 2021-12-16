@@ -70,7 +70,6 @@ recs_file_names = [
 ignore_embeddings = [
     'most-pop',
     'neumf',
-    'wrmf',
     'lightgcn',
     'multidae',
 ]
@@ -130,7 +129,7 @@ metrics_not_binary = ['accuracy']
 
 data_root_list = ['movielens1M', 'lastfm1k']
 
-data_root = data_root_list[0]
+data_root = data_root_list[1]
 
 balance_data = True
 
