@@ -12,18 +12,27 @@ import pandas as pd
 import numpy as np
 
 
-def balance_data(df):
+def balance_data(df, label_name):
     """
     Balance gender data
     :param df: the dataframe
+    :param label_name: the current label
     :return: a balanced dataframe
     """
+    true_value = 1 if label_name == 'gender' else True
+    false_value = 0 if label_name == 'gender' else False
     print("Before rows: " + str(len(df)))
-    dff_true = df[df['class'] == 1]
-    true_count = len(dff_true)
-    print("True rows: " + str(true_count))
-    dff_false = df[df['class'] == 0].sample(n=true_count, random_state=1)
-    dff_balanced = pd.concat([dff_true, dff_false]).sample(frac=1, random_state=47)
+    dff_true = df[df['class'] == true_value]
+    dff_false = df[df['class'] == false_value]
+    if len(dff_true) > len(dff_false):
+        a = dff_true
+        b = dff_false
+    else:
+        a = dff_false
+        b = dff_true
+    print("# smaller class: " + str(len(b)))
+    a = a.sample(n=len(b), random_state=1)
+    dff_balanced = pd.concat([a, b]).sample(frac=1, random_state=47)
     print("Balanced rows: " + str(len(dff_balanced)))
     return dff_balanced
 

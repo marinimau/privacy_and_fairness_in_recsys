@@ -32,7 +32,7 @@ def run_experiment(original_data, label_name='gender', embeddings=False):
     user_data = get_gender_labels() if label_name == 'gender' else get_age_labels()
     # balance data
     if conf.balance_data:
-        user_data = balance_data(user_data)
+        user_data = balance_data(user_data, label_name)
     # merge labels with original data
     joined_df = merge_data(user_data, original_data) if not embeddings else merge_embeddings(user_data, original_data)
     if conf.lite_dataset:

@@ -119,7 +119,7 @@ dataset_names = [
     'multidae_classification_best_50',
 ]
 
-label_names = ['gender', 'age']
+label_names = ['age']  # , 'gender']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
 
