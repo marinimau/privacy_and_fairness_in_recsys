@@ -2,4 +2,4 @@
 /venv/
 /data/*.tsv
 /data/*.csv
-/embeddings/*.csv
+/embeddings/*/*.csv
