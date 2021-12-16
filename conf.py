@@ -72,6 +72,7 @@ ignore_embeddings = [
     'neumf',
     'lightgcn',
     'multidae',
+    'item-knn',
 ]
 
 dataset_names = [
