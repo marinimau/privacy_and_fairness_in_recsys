@@ -28,8 +28,6 @@ def run_experiment(original_data, label_name='gender', embeddings=False):
     :param embeddings: flag that requires special experiment for embeddings
     :return:
     """
-    # time cutoff
-    original_data = do_temporal_splitting(original_data)
     # get labels
     user_data = get_gender_labels() if label_name == 'gender' else get_age_labels()
     # balance data
@@ -66,6 +64,9 @@ def observation_experiment(label):
     df.set_index('uid')
     if conf.data_root == conf.data_root_list[1]:
         df['rating'] = df['rating'].astype(int)
+        # time cutoff
+    if conf.perform_time_splitting:
+        df = do_temporal_splitting(df)
     metrics = get_metrics_from_classifier(df, label)
     write_metrics(label_name=label, dataset_name='observation', metrics=metrics)
 

@@ -131,7 +131,9 @@ data_root_list = ['movielens1M', 'lastfm1k']
 
 time_split_cutoffs = [.25, .50, .75, 1]
 
-time_split_current_cutoff = time_split_cutoffs[0]
+time_split_current_cutoff = time_split_cutoffs[3]
+
+perform_time_splitting = True
 
 data_root = data_root_list[0]
 
