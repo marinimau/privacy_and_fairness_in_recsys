@@ -47,8 +47,8 @@ def do_temporal_splitting(df):
     print('Time splitting: ')
     if conf.data_root == conf.data_root_list[0]:
         print('size before: ' + str(df.size))
-        grouped = df.sort_values(['timestamp'], ascending=True).groupby('uid').head(conf.time_split_current_cutoff)
-        # grouped = grouped.apply(lambda x: x.sample(frac=conf.time_split_current_cutoff))
+        grouped = df.sort_values(['timestamp'], ascending=True).groupby('uid')
+        grouped = grouped.apply(lambda x: x.head(int(len(x) * conf.time_split_current_cutoff)))
         df = grouped.apply(lambda x: x)
         print('size after: ' + str(df.size))
     return df
