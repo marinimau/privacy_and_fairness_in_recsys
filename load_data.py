@@ -68,8 +68,7 @@ def get_age_labels():
     user_age_df = user_df.drop('gender', axis=1)
     user_age_df.rename(columns={'age': 'class'}, inplace=True)
     if conf.data_root == conf.data_root_list[0]:
-        user_age_df['class'] = (user_age_df['class'] < 25)
-        print(user_age_df['class'].unique())
+        user_age_df['class'] = (user_age_df['class'] < 31)
     return user_age_df
 
 

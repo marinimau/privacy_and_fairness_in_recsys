@@ -11,6 +11,8 @@
 import pandas as pd
 import numpy as np
 
+import conf
+
 
 def balance_data(df, label_name):
     """
@@ -35,6 +37,21 @@ def balance_data(df, label_name):
     dff_balanced = pd.concat([a, b]).sample(frac=1, random_state=47)
     print("Balanced rows: " + str(len(dff_balanced)))
     return dff_balanced
+
+
+def do_temporal_splitting(df):
+    """
+    Do temporal splitting
+    :param df: the dataframe
+    """
+    print('Time splitting: ')
+    if conf.data_root == conf.data_root_list[0]:
+        print('size before: ' + str(df.size))
+        grouped = df.sort_values(['timestamp'], ascending=True).groupby('uid').head(conf.time_split_current_cutoff)
+        # grouped = grouped.apply(lambda x: x.sample(frac=conf.time_split_current_cutoff))
+        df = grouped.apply(lambda x: x)
+        print('size after: ' + str(df.size))
+    return df
 
 
 def merge_data(user_df, features_df, on_recs=False):

@@ -129,6 +129,10 @@ metrics_not_binary = ['accuracy']
 
 data_root_list = ['movielens1M', 'lastfm1k']
 
+time_split_cutoffs = [.25, .50, .75, 1]
+
+time_split_current_cutoff = time_split_cutoffs[0]
+
 data_root = data_root_list[0]
 
 balance_data = True

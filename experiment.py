@@ -15,7 +15,7 @@ from load_data import get_gender_labels, get_age_labels
 from classify import split_data, perform_classification
 from evaluator import get_evaluation_metrics, get_confusion_matrix
 from load_data import get_best_recs
-from preprocessing import balance_data, merge_data, merge_embeddings
+from preprocessing import balance_data, merge_data, merge_embeddings, do_temporal_splitting
 from utils import write_metrics, get_inspector_file_name
 from conf import best
 
@@ -28,6 +28,8 @@ def run_experiment(original_data, label_name='gender', embeddings=False):
     :param embeddings: flag that requires special experiment for embeddings
     :return:
     """
+    # time cutoff
+    original_data = do_temporal_splitting(original_data)
     # get labels
     user_data = get_gender_labels() if label_name == 'gender' else get_age_labels()
     # balance data
