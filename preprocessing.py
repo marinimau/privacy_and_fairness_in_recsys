@@ -41,7 +41,7 @@ def balance_data(df, label_name):
 
 def do_temporal_splitting(df):
     """
-    Do temporal splitting
+    Do temporal splitting: maintain the first n records for each user (based on timestamp - asc), n is a percentage
     :param df: the dataframe
     """
     print('Time splitting: ')
@@ -55,7 +55,7 @@ def do_temporal_splitting(df):
 
 def merge_data(user_df, features_df, on_recs=False):
     """
-    Merge data
+    Merge features with user labels
     :param user_df: the user dataframe
     :param features_df: the features df
     :param on_recs: a flag that indicates that we are merging recs
@@ -80,7 +80,7 @@ def merge_data(user_df, features_df, on_recs=False):
 
 def merge_embeddings(user_df, features_df):
     """
-    Merge embeddings data
+    Merge embeddings data with user labels
     :param user_df: the user dataframe
     :param features_df: the features df
     :return:
