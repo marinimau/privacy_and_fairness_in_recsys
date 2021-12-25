@@ -119,7 +119,7 @@ dataset_names = [
     'multidae_classification_best_50',
 ]
 
-label_names = ['age', 'gender']
+label_names = ['gender', 'age']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
 
@@ -131,7 +131,7 @@ data_root_list = ['movielens1M', 'lastfm1k']
 
 time_split_cutoffs = [.25, .50, .75, 1]
 
-time_split_current_cutoff = time_split_cutoffs[1]
+time_split_current_cutoff = time_split_cutoffs[0]
 
 perform_time_splitting = True
 
