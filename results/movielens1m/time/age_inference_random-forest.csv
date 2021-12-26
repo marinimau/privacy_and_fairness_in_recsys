@@ -226,3 +226,8 @@ neumf_embeddings,0,0
 wrmf_embeddings,5.660946846008301,0.016555070877075195
 lightgcn_embeddings,0,0
 multidae_embeddings,0,0
+user-knn_embeddings,6.868605852127075,0.023150205612182617
+item-knn_embeddings,6.956394910812378,0.006818056106567383
+most-pop_embeddings,0,0
+bprmf_embeddings,0.05956315994262695,0.0001342296600341797
+neumf_embeddings,0,0
