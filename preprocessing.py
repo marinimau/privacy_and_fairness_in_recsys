@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 
 import conf
+from load_data import get_users
 
 
 def balance_data(df, label_name):
@@ -85,12 +86,13 @@ def merge_embeddings(user_df, features_df):
     :param features_df: the features df
     :return:
     """
-    features_df = features_df[1:]
-    features_df = pd.concat([user_df['uid'], features_df], axis=1, ignore_index=True)
-    features_df.rename(columns={0: 'uid'}, inplace=True)
-    features_df.replace([np.inf], 999999, inplace=True)
-    features_df.replace([-np.inf], -999999, inplace=True)
+    features_df["uid"] = features_df.index
+    # remove inf and fill nan
+    features_df.replace([np.inf], 999, inplace=True)
+    features_df.replace([-np.inf], -999, inplace=True)
     features_df = features_df.fillna(0)
+    # merge features with balanced user
     merged_data = pd.merge(features_df, user_df, on='uid')
     merged_data.columns = merged_data.columns.astype(str)
+    # merged_data.drop(columns='uid', inplace=True)
     return merged_data
