@@ -85,9 +85,13 @@ def merge_embeddings(user_df, features_df):
     :param features_df: the features df
     :return:
     """
-    features_df.replace([np.inf], 9, inplace=True)
-    features_df.replace([-np.inf], -9, inplace=True)
+    features_df = features_df[1:]
+    features_df = pd.concat([user_df['uid'], features_df], axis=1, ignore_index=True)
+    features_df.rename(columns={0: 'uid'}, inplace=True)
+    features_df.replace([np.inf], 999999, inplace=True)
+    features_df.replace([-np.inf], -999999, inplace=True)
     features_df = features_df.fillna(0)
-    merged_data = pd.merge(features_df, user_df, left_index=True, right_index=True)
+    merged_data = pd.merge(features_df, user_df, on='uid')
     merged_data.columns = merged_data.columns.astype(str)
+    print(merged_data['class'].unique())
     return merged_data
