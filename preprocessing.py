@@ -90,7 +90,7 @@ def merge_embeddings(user_df, features_df):
     features_df.replace([np.inf], 999, inplace=True)
     features_df.replace([-np.inf], -999, inplace=True)
     features_df = features_df.fillna(0)
+    features_df = features_df.astype(int)
     # merge features with balanced user
     merged_data = pd.merge(features_df, user_df, on='uid')
-    merged_data.columns = merged_data.columns.astype(str)
     return merged_data
