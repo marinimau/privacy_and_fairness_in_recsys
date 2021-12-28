@@ -48,7 +48,10 @@ def do_temporal_splitting(df):
     if conf.data_root == conf.data_root_list[0]:
         print('size before: ' + str(df.size))
         grouped = df.sort_values(['timestamp'], ascending=True).groupby('uid')
-        df = grouped.apply(lambda x: x.head(int(len(x) * conf.time_split_current_cutoff)))
+        if conf.fixed_time_splitting:
+            df = grouped.apply(lambda x: x.head(conf.time_split_current_cutoff_fixed))
+        else:
+            df = grouped.apply(lambda x: x.head(int(len(x) * conf.time_split_current_cutoff)))
         print('size after: ' + str(df.size))
     return df
 
@@ -85,7 +88,7 @@ def merge_embeddings(user_df, features_df):
     :param features_df: the features df
     :return:
     """
-    features_df["uid"] = features_df.index
+    features_df["uid"] = features_df.index  # the row with ID = 0 is not an user (and UIDs start at 1)
     # remove inf and fill nan
     features_df.replace([np.inf], 999, inplace=True)
     features_df.replace([-np.inf], -999, inplace=True)

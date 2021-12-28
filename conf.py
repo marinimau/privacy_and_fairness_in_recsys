@@ -139,7 +139,13 @@ time_split_cutoffs = [.25, .50, .75, 1]
 
 time_split_current_cutoff = time_split_cutoffs[3]
 
+time_split_cutoffs_fixed = [5, 10, 20]
+
+time_split_current_cutoff_fixed = time_split_cutoffs_fixed[0]
+
 perform_time_splitting = True
+
+fixed_time_splitting = True
 
 data_root = data_root_list[0]
 
