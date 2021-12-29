@@ -141,7 +141,7 @@ time_split_current_cutoff = time_split_cutoffs[3]
 
 time_split_cutoffs_fixed = [5, 10, 20]
 
-time_split_current_cutoff_fixed = time_split_cutoffs_fixed[1]
+time_split_current_cutoff_fixed = time_split_cutoffs_fixed[2]
 
 perform_time_splitting = True
 
