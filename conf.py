@@ -120,8 +120,8 @@ dataset_names = [
 ]
 
 required_experiments = {
-    'observation': False,
-    'embeddings': True,
+    'observation': True,
+    'embeddings': False,
     'recs': False
 }
 
@@ -141,7 +141,7 @@ time_split_current_cutoff = time_split_cutoffs[3]
 
 time_split_cutoffs_fixed = [5, 10, 20]
 
-time_split_current_cutoff_fixed = time_split_cutoffs_fixed[0]
+time_split_current_cutoff_fixed = time_split_cutoffs_fixed[1]
 
 perform_time_splitting = True
 
