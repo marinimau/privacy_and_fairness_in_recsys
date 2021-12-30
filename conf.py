@@ -125,6 +125,12 @@ required_experiments = {
     'recs': False
 }
 
+required_obfuscated = {
+    'observation': True,
+    'embeddings': False,
+    'recs': False
+}
+
 label_names = ['age', 'gender']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
@@ -143,9 +149,9 @@ time_split_cutoffs_fixed = [5, 10, 20]
 
 time_split_current_cutoff_fixed = time_split_cutoffs_fixed[2]
 
-perform_time_splitting = True
+perform_time_splitting = False
 
-fixed_time_splitting = True
+fixed_time_splitting = False
 
 data_root = data_root_list[0]
 
