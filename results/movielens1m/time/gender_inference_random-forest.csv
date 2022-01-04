@@ -388,3 +388,7 @@ lightgcn_relevance,0,0
 lightgcn_classification_best_10,0,0
 lightgcn_classification_best_20,0,0
 lightgcn_classification_best_50,0,0
+multidae_relevance,349.29661893844604,0.33199405670166016
+multidae_classification_best_10,315.7411127090454,0.15336990356445312
+multidae_classification_best_20,319.75342321395874,0.396744966506958
+multidae_classification_best_50,346.48762011528015,0.5096120834350586
