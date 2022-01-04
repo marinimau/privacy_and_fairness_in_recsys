@@ -120,18 +120,18 @@ dataset_names = [
 ]
 
 required_experiments = {
-    'observation': True,
+    'observation': False,
     'embeddings': False,
-    'recs': False
+    'recs': True
 }
 
 required_obfuscated = {
     'observation': True,
     'embeddings': False,
-    'recs': False
+    'recs': True
 }
 
-label_names = ['age', 'gender']
+label_names = ['gender', 'age']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
 
@@ -170,7 +170,3 @@ SHOW_PLOT = False
 DEBUG = False
 
 current_trade_off_file_name = ''
-
-
-
-

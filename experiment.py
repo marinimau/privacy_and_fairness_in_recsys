@@ -8,6 +8,7 @@
 #
 
 import conf
+import os
 import pandas as pd
 import numpy as np
 
@@ -80,10 +81,9 @@ def embedding_experiments(dataset_name, label):
     :return:
     """
     # ratings
-    if dataset_name in conf.ignore_embeddings:
-        df = None
-    else:
-        df = pd.read_csv('./embeddings/' + conf.data_root + '/' + dataset_name + '.csv', header=None)
+    root_path = 'embeddings_obfuscated' if conf.required_obfuscated['embeddings'] else 'embeddings'
+    file_path = './' + root_path + '/' + conf.data_root + '/' + dataset_name + '.tsv'
+    df = pd.read_csv(file_path, header=None) if os.path.isfile(file_path) else None
     embeddings_dataset = dataset_name + '_embeddings'
     conf.current_trade_off_file_name = get_inspector_file_name(embeddings_dataset, label)
     metrics = get_metrics_from_classifier(df, label, embeddings=True)
@@ -98,9 +98,14 @@ def recs_experiment(dataset_name, label):
     :return:
     """
     # ratings
-    df = pd.read_csv('./recs/' + conf.data_root + '/' + dataset_name + '.tsv', header=None, sep='\t')
-    df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating'}, inplace=True)
-    df.set_index('uid')
+    root_path = 'recs_obfuscated' if conf.required_obfuscated['recs'] else 'recs'
+    file_path = './' + root_path + '/' + conf.data_root + '/' + dataset_name + '.tsv'
+    if os.path.isfile(file_path):
+        df = pd.read_csv(file_path, header=None, sep='\t')
+        df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating'}, inplace=True)
+        df.set_index('uid')
+    else:
+        df = None
     # relevance
     relevance_dataset = dataset_name + '_relevance'
     conf.current_trade_off_file_name = get_inspector_file_name(relevance_dataset, label)
@@ -108,7 +113,7 @@ def recs_experiment(dataset_name, label):
     write_metrics(label_name=label, dataset_name=relevance_dataset, metrics=metrics)
     # recs
     for i in best:
-        recs = get_best_recs(df, i)
+        recs = get_best_recs(df, i) if df is not None else None
         classification_dataset = dataset_name + '_classification_best_' + str(i)
         conf.current_trade_off_file_name = get_inspector_file_name(classification_dataset, label)
         metrics = get_metrics_from_classifier(recs, label)
