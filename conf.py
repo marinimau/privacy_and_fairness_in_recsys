@@ -121,13 +121,13 @@ dataset_names = [
 
 required_experiments = {
     'observation': False,
-    'embeddings': False,
-    'recs': True
+    'embeddings': True,
+    'recs': False
 }
 
 required_obfuscated = {
     'observation': True,
-    'embeddings': False,
+    'embeddings': True,
     'recs': True
 }
 

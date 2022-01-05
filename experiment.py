@@ -82,7 +82,7 @@ def embedding_experiments(dataset_name, label):
     """
     # ratings
     root_path = 'embeddings_obfuscated' if conf.required_obfuscated['embeddings'] else 'embeddings'
-    file_path = './' + root_path + '/' + conf.data_root + '/' + dataset_name + '.tsv'
+    file_path = './' + root_path + '/' + conf.data_root + '/' + dataset_name + '.csv'
     df = pd.read_csv(file_path, header=None) if os.path.isfile(file_path) else None
     embeddings_dataset = dataset_name + '_embeddings'
     conf.current_trade_off_file_name = get_inspector_file_name(embeddings_dataset, label)
