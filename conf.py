@@ -133,11 +133,7 @@ required_obfuscated = {
 
 use_pred_obfuscation = False
 
-obfuscated_method = {
-    'observation': ('pred/' if use_pred_obfuscation else 'avg/') if required_obfuscated['observation'] else '',
-    'embeddings': ('pred/' if use_pred_obfuscation else 'avg/') if required_obfuscated['embeddings'] else '',
-    'recs': ('pred/' if use_pred_obfuscation else 'avg/') if required_obfuscated['recs'] else ''
-}
+obfuscated_method = ('pred/' if use_pred_obfuscation else 'avg/') if required_obfuscated['observation'] else ''
 
 label_names = ['gender', 'age']
 
