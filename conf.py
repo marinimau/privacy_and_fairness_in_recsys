@@ -131,6 +131,14 @@ required_obfuscated = {
     'recs': True
 }
 
+use_pred_obfuscation = False
+
+obfuscated_method = {
+    'observation': ('pred/' if use_pred_obfuscation else 'avg/') if required_obfuscated['observation'] else '',
+    'embeddings': ('pred/' if use_pred_obfuscation else 'avg/') if required_obfuscated['embeddings'] else '',
+    'recs': ('pred/' if use_pred_obfuscation else 'avg/') if required_obfuscated['recs'] else ''
+}
+
 label_names = ['gender', 'age']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
