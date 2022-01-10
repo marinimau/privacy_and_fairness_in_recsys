@@ -120,13 +120,13 @@ dataset_names = [
 ]
 
 required_experiments = {
-    'observation': False,
-    'embeddings': True,
-    'recs': True
+    'observation': True,
+    'embeddings': False,
+    'recs': False
 }
 
 required_obfuscated = {
-    'observation': True,
+    'observation': False,
     'embeddings': True,
     'recs': True
 }
@@ -159,7 +159,7 @@ fixed_time_splitting = False
 
 data_root = data_root_list[0]
 
-balance_data = True
+balance_data = False
 
 lite_dataset = False
 
