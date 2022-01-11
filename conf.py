@@ -137,9 +137,9 @@ obfuscation_path = [
     'filtered/'
 ]
 
-obfuscation_method = 0
+obfuscation_method_index = 0
 
-obfuscated_method = obfuscation_path[obfuscation_method] if required_obfuscated['observation'] else ''
+obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
 
 label_names = ['gender', 'age']
 

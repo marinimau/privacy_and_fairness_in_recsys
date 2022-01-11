@@ -45,6 +45,7 @@ def interaction_filter(original_data):
         grouped = original_data.sort_values(['timestamp'], ascending=False).groupby('uid')
         original_data = grouped.apply(group_split)
         print('size after: ' + str(len(original_data)))
+    print(original_data.head())
     return original_data
 
 
@@ -55,7 +56,7 @@ def load_original():
     """
     original_df = pd.read_csv('data/' + conf.data_root + '/ratings.tsv', header=None, sep='\t')
     original_df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
-    original_df.set_index('uid')
+    original_df.set_index(keys=['uid', 'movie_id'])
     return original_df
 
 
@@ -66,7 +67,7 @@ def save_data(filtered_data):
     """
     path = 'data_obfuscated/' + conf.data_root + '/' + conf.obfuscation_path[2]
     os.makedirs(path, exist_ok=True)
-    filtered_data.to_csv(path + 'ratings.tsv', sep='\t', header=False)
+    filtered_data.to_csv(path + 'ratings.tsv', sep='\t', header=False, index=False)
 
 
 save_data(interaction_filter(load_original()))

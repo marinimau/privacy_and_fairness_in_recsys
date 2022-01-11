@@ -61,12 +61,13 @@ def observation_experiment(label):
     """
     # interactions
     root_path = 'data_obfuscated' if conf.required_obfuscated['observation'] else 'data'
-    df = pd.read_csv(root_path + '/' + conf.data_root + '/ratings.tsv', header=None, sep='\t')
+    df = pd.read_csv(root_path + '/' + conf.data_root + '/' + conf.obfuscated_method + 'ratings.tsv', header=None,
+                     sep='\t')
     df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
     df.set_index('uid')
     if conf.data_root == conf.data_root_list[1]:
         df['rating'] = df['rating'].astype(int)
-        # time cutoff
+    # time cutoff
     if conf.perform_time_splitting:
         df = do_temporal_splitting(df)
     metrics = get_metrics_from_classifier(df, label)
