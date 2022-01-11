@@ -8,6 +8,7 @@
 #
 
 import conf
+import os
 
 import pandas as pd
 
@@ -18,7 +19,13 @@ def group_split(x):
     :param x: the user interactions
     :return: the filtered group
     """
-    return x.head(1)
+    user_interactions = x
+    subset_size = int(len(user_interactions) / conf.n_subset_for_filtering)
+    subsets = user_interactions.iloc[0:subset_size - 1]
+    for i in range(1, conf.n_subset_for_filtering - 1):
+        subsets.append(user_interactions.iloc[i * subset_size:(i + 1) * subset_size - 1].sample(
+            frac=conf.filtering_sampling_percentages[i], random_state=698))
+    return subsets
 
 
 def interaction_filter(original_data):
@@ -34,10 +41,10 @@ def interaction_filter(original_data):
     """
     if conf.data_root == conf.data_root_list[0]:
         print('Interaction filter: ')
-        print('size before: ' + str(original_data.shape))
+        print('size before: ' + str(len(original_data)))
         grouped = original_data.sort_values(['timestamp'], ascending=False).groupby('uid')
         original_data = grouped.apply(group_split)
-        print('size after: ' + str(original_data.size))
+        print('size after: ' + str(len(original_data)))
     return original_data
 
 
@@ -49,8 +56,17 @@ def load_original():
     original_df = pd.read_csv('data/' + conf.data_root + '/ratings.tsv', header=None, sep='\t')
     original_df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
     original_df.set_index('uid')
-    print(len(original_df))
-    return original_df#.drop_duplicates(subset=['uid', 'movie_id'])
+    return original_df
 
 
-interaction_filter(load_original())
+def save_data(filtered_data):
+    """
+    save filtered data in a .tsv file
+    :param filtered_data: the filtered data
+    """
+    path = 'data_obfuscated/' + conf.data_root + '/' + conf.obfuscation_path[2]
+    os.makedirs(path, exist_ok=True)
+    filtered_data.to_csv(path + 'ratings.tsv', sep='\t', header=False)
+
+
+save_data(interaction_filter(load_original()))

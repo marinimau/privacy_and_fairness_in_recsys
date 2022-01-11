@@ -180,3 +180,8 @@ SHOW_PLOT = False
 DEBUG = False
 
 current_trade_off_file_name = ''
+
+filtering_sampling_percentages = [1, 0.7, 0.4, 0.2]
+
+n_subset_for_filtering = len(filtering_sampling_percentages)
+
