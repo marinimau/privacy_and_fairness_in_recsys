@@ -39,15 +39,15 @@ def run_experiment(original_data, label_name='gender', embeddings=False):
     if conf.lite_dataset:
         joined_df = joined_df.head(conf.lite_dataset_size)
     # split in training and test set
-    x_train, x_test, y_train, y_test = split_data(joined_df)
+    x_train, x_test, y_train, y_test = split_data(joined_df, preserve_order=conf.maintain_order_in_train_test_split)
     # classify
     y_random_forest, training_time_rf, prediction_time_rf = perform_classification(x_train, y_train, x_test,
                                                                                    'random_forest')
     y_logistic_regression, training_time_lr, prediction_time_lr = perform_classification(x_train, y_train, x_test,
                                                                                          'logistic_regression')
     # get evaluation metrics
-    random_forest_metrics = get_evaluation_metrics(y_test, y_random_forest, binary=(label_name == 'gender'))
-    logistic_regression_metrics = get_evaluation_metrics(y_test, y_logistic_regression, binary=(label_name == 'gender'))
+    random_forest_metrics = get_evaluation_metrics(y_test, y_random_forest)
+    logistic_regression_metrics = get_evaluation_metrics(y_test, y_logistic_regression)
     return [random_forest_metrics, logistic_regression_metrics, (training_time_rf, prediction_time_rf),
             (training_time_lr, prediction_time_lr), get_confusion_matrix(y_test, y_random_forest),
             get_confusion_matrix(y_test, y_logistic_regression)]

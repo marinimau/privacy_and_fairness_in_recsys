@@ -126,7 +126,7 @@ required_experiments = {
 }
 
 required_obfuscated = {
-    'observation': True,
+    'observation': False,
     'embeddings': True,
     'recs': True
 }
@@ -137,11 +137,11 @@ obfuscation_path = [
     'filtered/'
 ]
 
-obfuscation_method_index = 2
+obfuscation_method_index = 0
 
 obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
 
-label_names = ['age', 'gender']
+label_names = ['gender', 'age']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
 
@@ -165,13 +165,17 @@ fixed_time_splitting = False
 
 data_root = data_root_list[0]
 
-balance_data = True
+balance_data = False
+
+normalize_data = False
 
 lite_dataset = False
 
+maintain_order_in_train_test_split = True
+
 lite_dataset_size = 100
 
-classifier_evaluation_plot = True
+classifier_evaluation_plot = False
 
 VERBOSE = True
 

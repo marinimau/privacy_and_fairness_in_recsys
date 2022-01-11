@@ -8,24 +8,34 @@
 #
 
 import time
+import pandas as pd
 
+from sklearn import preprocessing
 from sklearn.model_selection import train_test_split, GridSearchCV
 
 import conf
 from inspector import ClassifierTradeOffInspector
 
 
-def split_data(dff, test_size=0.3, random_state=698):
+def split_data(dff, test_size=0.3, random_state=698, preserve_order=False):
     """
     Split data for classification phase
     :param dff: the original dataframe
     :param test_size: the percentage for test set splitting
     :param random_state: the random state
+    :param preserve_order: preserve the order of the user
     :return:
     """
     x = dff.iloc[:, dff.columns != 'class']
     y = dff.iloc[:, dff.columns == 'class']
-    return train_test_split(x, y, test_size=test_size, random_state=random_state)
+    if conf.normalize_data:
+        x = pd.DataFrame(preprocessing.normalize(x)).fillna(0)
+    if not preserve_order:
+        return train_test_split(x, y, test_size=test_size, random_state=random_state)
+    else:
+        x_train, y_train = x[0:int(0.8 * len(x))], y[0:int(0.8 * len(x))]
+        x_test, y_test = x[int(0.8 * len(x)):], y[int(0.8 * len(x)):]
+        return x_train, x_test, y_train, y_test
 
 
 def perform_classification(x_train, y_train, x_test, classifier_name):
