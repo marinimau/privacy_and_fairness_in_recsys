@@ -126,7 +126,7 @@ required_experiments = {
 }
 
 required_obfuscated = {
-    'observation': False,
+    'observation': True,
     'embeddings': True,
     'recs': True
 }
@@ -137,7 +137,7 @@ obfuscation_path = [
     'filtered/'
 ]
 
-obfuscation_method_index = 0
+obfuscation_method_index = 2
 
 obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
 
@@ -165,13 +165,13 @@ fixed_time_splitting = False
 
 data_root = data_root_list[0]
 
-balance_data = False
+balance_data = True
 
 normalize_data = False
 
 lite_dataset = False
 
-maintain_order_in_train_test_split = True
+maintain_order_in_train_test_split = False
 
 lite_dataset_size = 100
 
@@ -185,7 +185,7 @@ DEBUG = False
 
 current_trade_off_file_name = ''
 
-filtering_sampling_percentages = [1, 0.7, 0.4, 0.2]
+filtering_sampling_percentages = [1, 0.8, 0.6, 0.4]
 
 n_subset_for_filtering = len(filtering_sampling_percentages)
 
