@@ -14,7 +14,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 
 urls = {
-    "movielens1m": "http://files.grouplens.org/datasets/movielens/ml-1m.zip"
+    "movielens1m": "https://files.grouplens.org/datasets/movielens/ml-1m.zip"
 }
 
 classifiers = ['random-forest', 'logistic-regression']
@@ -131,9 +131,15 @@ required_obfuscated = {
     'recs': True
 }
 
-use_pred_obfuscation = False
+obfuscation_path = [
+    'pred/',
+    'avg/',
+    'filtered/'
+]
 
-obfuscated_method = ('pred/' if use_pred_obfuscation else 'avg/') if required_obfuscated['observation'] else ''
+obfuscation_method = 0
+
+obfuscated_method = obfuscation_path[obfuscation_method] if required_obfuscated['observation'] else ''
 
 label_names = ['gender', 'age']
 

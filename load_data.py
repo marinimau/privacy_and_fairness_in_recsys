@@ -25,13 +25,14 @@ def extract_data(response, names):
     :return:
     """
     for name in names:
-        data = []
         print(f"extracting {name}.dat..." if VERBOSE else "")
         with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
+            data = []
             for line in zip_ref.open(f"ml-1m/{name}.dat"):
+                print(str(line, "latin-1").replace("::", "\t"))
                 data.append(str(line, "latin-1").replace("::", "\t"))
-        os.makedirs("data/movielens1m/", exist_ok=True)
-        with open(f"data/movielens1m/{name}.tsv", "w") as f:
+        os.makedirs("data/movielens1m/new/", exist_ok=True)
+        with open(f"data/movielens1m/new/{name}.tsv", "w") as f:
             f.writelines(data)
         print("done." if VERBOSE else "")
 

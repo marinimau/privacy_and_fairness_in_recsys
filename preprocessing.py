@@ -46,13 +46,13 @@ def do_temporal_splitting(df):
     """
     print('Time splitting: ')
     if conf.data_root == conf.data_root_list[0]:
-        print('size before: ' + str(df.size))
+        print('size before: ' + str(len(df)))
         grouped = df.sort_values(['timestamp'], ascending=True).groupby('uid')
         if conf.fixed_time_splitting:
             df = grouped.head(conf.time_split_current_cutoff_fixed)
         else:
             df = grouped.apply(lambda x: x.head(int(len(x) * conf.time_split_current_cutoff)))
-        print('size after: ' + str(df.size))
+        print('size after: ' + str(len(df)))
     return df
 
 
