@@ -141,7 +141,7 @@ obfuscation_method_index = 2
 
 obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
 
-label_names = ['gender', 'age']
+label_names = ['age', 'gender']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
 

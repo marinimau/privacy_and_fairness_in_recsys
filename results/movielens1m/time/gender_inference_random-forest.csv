@@ -504,3 +504,8 @@ multidae_classification_best_50,573.2445158958435,0.1466050148010254
 user-knn_embeddings,0,0
 item-knn_embeddings,0,0
 most-pop_embeddings,0,0
+user-knn_embeddings,940.9487211704254,0.45926880836486816
+item-knn_embeddings,0,0
+most-pop_embeddings,0,0
+bprmf_embeddings,149.9160041809082,0.008725166320800781
+neumf_embeddings,0,0
