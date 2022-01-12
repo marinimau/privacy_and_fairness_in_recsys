@@ -120,8 +120,8 @@ dataset_names = [
 ]
 
 required_experiments = {
-    'observation': True,
-    'embeddings': False,
+    'observation': False,
+    'embeddings': True,
     'recs': False
 }
 
