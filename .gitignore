@@ -3,3 +3,6 @@
 /data/movielens1m/*.tsv
 /data/*.csv
 /embeddings/*/*.csv
+/fairecsys/fairrecsys/*
+/fairecsys/fairrecsys/data/*
+/fairecsys/fairrecsys/src/*
