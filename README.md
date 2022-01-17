@@ -76,20 +76,32 @@ classifier_params = {
 ```
 a dict that contains, for each classifier, the params for the grid search
 
+```
 trade_off_param_range = {
     'random_forest': np.arange(200, 700, 100),
     'logistic_regression': [0.001, 0.05, 0.1, 0.5, 1.0, 10.0],
     'naive_bayes': [0.001, 0.05, 0.1, 0.5, 1.0, 10.0]
 }
+```
+a dict that contains, for each classifier the x ticks for the learning and validation curve plot
 
+```
 trade_off_param_name = {
     'random_forest': 'n_estimators',
     'logistic_regression': 'C',
     'naive_bayes': 'priors'
 }
+```
+a dict that contains, for each classifier, the x axis title for the learning and validation curve plot
 
+## Recommender
+
+```
 best = [10, 20, 50]
+```
+the list of cutoffs for the recs
 
+```
 recs_file_names = [
     'user-knn',
     'item-knn',
@@ -100,14 +112,21 @@ recs_file_names = [
     'lightgcn',
     'multidae',
 ]
+```
+a list with names of relevance files (recs are extracted from the relevance files)
 
+```
 ignore_embeddings = [
     'most-pop',
     'neumf',
     'lightgcn',
     'multidae',
 ]
+```
+if a relevance file name is in this list we ignore embedding experiments for that classifier. Experiment are ignored also
+if the file is not found.
 
+```
 dataset_names = [
     'observation',
     'observation-no-score',
@@ -152,28 +171,46 @@ dataset_names = [
     'multidae_classification_best_20',
     'multidae_classification_best_50',
 ]
+```
+list that contains the name of the experiments, names ara generated automatically in the source, but we can perform a validation
+of the experiment name using this file. (like a test)
 
+```
 required_experiments = {
     'observation': False,
     'embeddings': True,
     'recs': False
 }
+```
+a dict that indicates the required experiments
 
+```
 required_obfuscated = {
     'observation': True,
     'embeddings': True,
     'recs': True
 }
+```
+a dict that indicates where we need the obfuscated data
 
+```
 obfuscation_path = [
     'pred/',
     'avg/',
     'filtered/'
 ]
+```
+a list that contains the obfuscated file paths (one for each method)
 
+```
 obfuscation_method_index = 2
+```
+the index of "obfuscation_path" to select the obfuscation method
 
+```
 obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
+```
+generates the path of the input files: '' if we not need obfuscation; or the current obfuscation_path if we need obfuscated data
 
 label_names = ['age', 'gender']
 
