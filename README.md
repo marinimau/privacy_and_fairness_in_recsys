@@ -83,7 +83,7 @@ trade_off_param_range = {
     'naive_bayes': [0.001, 0.05, 0.1, 0.5, 1.0, 10.0]
 }
 ```
-a dict that contains, for each classifier the x ticks for the learning and validation curve plot
+a dict that contains, for each classifier the x ticks for the learning and validation curves plot
 
 ```
 trade_off_param_name = {
@@ -92,7 +92,22 @@ trade_off_param_name = {
     'naive_bayes': 'priors'
 }
 ```
-a dict that contains, for each classifier, the x axis title for the learning and validation curve plot
+a dict that contains, for each classifier, the x axis title for the learning and validation curves plot
+
+```
+classifier_evaluation_plot = False
+```
+a flag that indicates if we need to generate learning and validation curves
+
+```
+current_trade_off_file_name = ''
+```
+the path to save the learning and validation curves (it is edited a run time)
+
+```
+SHOW_PLOT = False
+```
+a flag tha indicates if we need to see plot a run time (plots are still saved)
 
 ## Recommender
 
@@ -307,18 +322,30 @@ maintain_order_in_train_test_split = False
 ```
 a flag that indicates if we need to maintain order in the training and test data
 
+### Filtering method
 
-VERBOSE = True
-
-
-
-DEBUG = False
-
-
-
+```
 filtering_sampling_percentages = [1, 0.8, 0.6, 0.4]
+```
+the weight for each partition (the first is the one with the most recent interactions)
 
+```
 n_subset_for_filtering = len(filtering_sampling_percentages)
+```
+the number of partitions (it is the length of "filtering_sampling_percentages")
+
+### General
+
+```
+VERBOSE = True
+```
+verbose flag
+
+```
+DEBUG = False
+```
+not perform classification, allows you to quickly test the paths and the execution process of all experiments
+
 
 ## Author
 
