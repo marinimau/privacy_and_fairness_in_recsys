@@ -212,49 +212,109 @@ obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfus
 ```
 generates the path of the input files: '' if we not need obfuscation; or the current obfuscation_path if we need obfuscated data
 
+### Sensitive attributes inference
+
+```
 label_names = ['age', 'gender']
+```
+the name of the sensitive attributes
 
+```
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
+```
+a list of age label_names for movielens 1M, (not required if we binarize age)
 
+### Classifier evaluation
+
+```
 metrics = ['balanced_accuracy_score', 'f1_score', 'precision_score', 'recall_score', 'accuracy_score']
+```
+a list that contains the metrics we are using
 
-metrics_not_binary = ['accuracy']
+### Dataset
 
+```
 data_root_list = ['movielens1M', 'lastfm1k']
+```
+a list that contains the dataset. The organization of the input (interactions, embeddings, recs), results etc. is the same for each dataset.
 
-time_split_cutoffs = [.25, .50, .75, 1]
-
-time_split_current_cutoff = time_split_cutoffs[3]
-
-time_split_cutoffs_fixed = [5, 10, 20]
-
-time_split_current_cutoff_fixed = time_split_cutoffs_fixed[2]
-
-perform_time_splitting = False
-
-fixed_time_splitting = False
-
+```
 data_root = data_root_list[0]
+```
+the current dataset
 
+### Time split
+
+```
+time_split_cutoffs = [.25, .50, .75, 1]
+```
+a list of cutoffs for the time splitting
+
+```
+time_split_current_cutoff = time_split_cutoffs[3]
+```
+the selected cutoff for the experiments
+
+```
+time_split_cutoffs_fixed = [5, 10, 20]
+```
+a list of fixed cutoffs for the time splitting
+
+```
+time_split_current_cutoff_fixed = time_split_cutoffs_fixed[2]
+```
+the selected cutoffs for the experiments if we require fixed cutoffs
+
+```
+perform_time_splitting = False
+```
+a flag that indicates if we need to perform time splitting experiments (instead of using the entire dataset)
+
+```
+fixed_time_splitting = False
+```
+a flag that indicates if we need to use fixed time split data (if False we use percentage time splitting)
+
+### Classification preprocessing
+
+```
 balance_data = True
+```
+a flag that indicates if we need to balance the dataset
 
+```
 normalize_data = False
+```
+a flag that indicates if we need to normalize data (sklearn.preprocessing.normalize)
 
+```
 lite_dataset = False
+```
+if true we use the first only "lite_dataset_size" users for the experiments
 
-maintain_order_in_train_test_split = False
-
+```
 lite_dataset_size = 100
+```
+indicates how many users use for the experiments
 
-classifier_evaluation_plot = False
+```
+test_set_size = 0.3
+```
+the size of the test set, the size of the training set is 1 - test_set_size
+
+```
+maintain_order_in_train_test_split = False
+```
+a flag that indicates if we need to maintain order in the training and test data
+
 
 VERBOSE = True
 
-SHOW_PLOT = False
+
 
 DEBUG = False
 
-current_trade_off_file_name = ''
+
 
 filtering_sampling_percentages = [1, 0.8, 0.6, 0.4]
 
