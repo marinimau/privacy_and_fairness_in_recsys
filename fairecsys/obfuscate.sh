@@ -15,7 +15,7 @@ do
   do
     for g in "${classLabels[@]}";
     do
-      python3 fairrecsys/src/alg_distMet_mu1.py output/altered_"$m"_"$g"_cutoff_"$c".csv input/users_"$g".csv input/recs.csv "$c" 0.2
+      python3 fairrecsys/src/alg_distMet_mu1.py output/altered_"$m"_"$g"_cutoff_"$c".csv input/users_"$g".csv input/"$m"_cutoff"$c".csv "$c" 0.2
     done
   done
 done

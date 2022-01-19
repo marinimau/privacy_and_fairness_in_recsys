@@ -21,21 +21,27 @@ from utils import write_metrics, get_inspector_file_name
 from conf import best
 
 
-def run_experiment(original_data, label_name='gender', embeddings=False):
+def run_experiment(original_data, label_name='gender', embeddings=False, recs=False, already_merged=False):
     """
     run an experiment
     :param original_data: the interaction, relevance or recs
     :param label_name: the label name
-    :param embeddings: flag that requires special experiment for embeddings
+    :param embeddings: flag that requires special merge for embeddings
+    :param recs: flag that requires special merge for recs
+    :param already_merged: data is already merged
     :return:
     """
-    # get labels
-    user_data = get_gender_labels() if label_name == 'gender' else get_age_labels()
-    # balance data
-    if conf.balance_data:
-        user_data = balance_data(user_data, label_name)
-    # merge labels with original data
-    joined_df = merge_data(user_data, original_data) if not embeddings else merge_embeddings(user_data, original_data)
+    if not already_merged:
+        # get labels
+        user_data = get_gender_labels() if label_name == 'gender' else get_age_labels()
+        # balance data
+        if conf.balance_data:
+            user_data = balance_data(user_data, label_name)
+        # merge labels with original data
+        joined_df = merge_data(user_data, original_data, on_recs=recs) if not embeddings \
+            else merge_embeddings(user_data, original_data)
+    else:
+        joined_df = original_data
     if conf.lite_dataset:
         joined_df = joined_df.head(conf.lite_dataset_size)
     # split in training and test set
@@ -121,15 +127,17 @@ def recs_experiment(dataset_name, label):
         write_metrics(label_name=label, dataset_name=classification_dataset, metrics=metrics)
 
 
-def get_metrics_from_classifier(df, label, embeddings=False):
+def get_metrics_from_classifier(df, label, embeddings=False, recs=False, already_merged=False):
     """
     get metrics from classifier
     :param df: the dataframe
     :param label: the label name
     :param embeddings: flag that requires special experiment for embeddings
+    :param recs: flag that requires special merge for recs
+    :param already_merged: data is already merged
     :return:
     """
     if conf.DEBUG or df is None:
         return [(0, 0, 0, 0, 0), (0, 0, 0, 0, 0), (0, 0), (0, 0), np.array([0, 0, 0, 0]), np.array([0, 0, 0, 0])]
     else:
-        return run_experiment(df, label, embeddings)
+        return run_experiment(df, label, embeddings=embeddings, recs=recs, already_merged=already_merged)

@@ -181,7 +181,7 @@ VERBOSE = True
 
 SHOW_PLOT = False
 
-DEBUG = False
+DEBUG = True
 
 current_trade_off_file_name = ''
 
