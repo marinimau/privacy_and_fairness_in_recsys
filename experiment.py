@@ -17,7 +17,7 @@ from classify import split_data, perform_classification
 from evaluator import get_evaluation_metrics, get_confusion_matrix
 from load_data import get_best_recs
 from preprocessing import balance_data, merge_data, merge_embeddings, do_temporal_splitting
-from utils import write_metrics, get_inspector_file_name
+from utils import write_metrics, get_inspector_file_name, get_obfuscation_method
 from conf import best
 
 
@@ -67,15 +67,18 @@ def observation_experiment(label):
     """
     # interactions
     root_path = 'data_obfuscated' if conf.required_obfuscated['observation'] else 'data'
-    df = pd.read_csv(root_path + '/' + conf.data_root + '/' + conf.obfuscated_method + 'ratings.tsv', header=None,
-                     sep='\t')
-    df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
-    df.set_index('uid')
-    if conf.data_root == conf.data_root_list[1]:
-        df['rating'] = df['rating'].astype(int)
-    # time cutoff
-    if conf.perform_time_splitting:
-        df = do_temporal_splitting(df)
+    file_path = root_path + '/' + conf.data_root + '/' + get_obfuscation_method(label) + 'ratings.tsv'
+    if conf.VERBOSE:
+        print("reading: " + file_path + " " + str(os.path.isfile(file_path)))
+    df = pd.read_csv(file_path, header=None, sep='\t') if os.path.isfile(file_path) else None
+    if df is not None:
+        df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating', 3: 'timestamp'}, inplace=True)
+        df.set_index('uid')
+        if conf.data_root == conf.data_root_list[1]:
+            df['rating'] = df['rating'].astype(int)
+        # time cutoff
+        if conf.perform_time_splitting:
+            df = do_temporal_splitting(df)
     metrics = get_metrics_from_classifier(df, label)
     write_metrics(label_name=label, dataset_name='observation', metrics=metrics)
 
@@ -89,7 +92,9 @@ def embedding_experiments(dataset_name, label):
     """
     # ratings
     root_path = 'embeddings_obfuscated' if conf.required_obfuscated['embeddings'] else 'embeddings'
-    file_path = './' + root_path + '/' + conf.data_root + '/' + conf.obfuscated_method + dataset_name + '.csv'
+    file_path = './' + root_path + '/' + conf.data_root + '/' + get_obfuscation_method(label) + dataset_name + '.csv'
+    if conf.VERBOSE:
+        print("reading: " + file_path + " " + str(os.path.isfile(file_path)))
     df = pd.read_csv(file_path, header=None) if os.path.isfile(file_path) else None
     embeddings_dataset = dataset_name + '_embeddings'
     conf.current_trade_off_file_name = get_inspector_file_name(embeddings_dataset, label)
@@ -106,7 +111,9 @@ def recs_experiment(dataset_name, label):
     """
     # ratings
     root_path = 'recs_obfuscated' if conf.required_obfuscated['recs'] else 'recs'
-    file_path = './' + root_path + '/' + conf.data_root + '/' + conf.obfuscated_method + dataset_name + '.tsv'
+    file_path = './' + root_path + '/' + conf.data_root + '/' + get_obfuscation_method(label) + dataset_name + '.tsv'
+    if conf.VERBOSE:
+        print("reading: " + file_path + " " + str(os.path.isfile(file_path)))
     if os.path.isfile(file_path):
         df = pd.read_csv(file_path, header=None, sep='\t')
         df.rename(columns={0: 'uid', 1: 'movie_id', 2: 'rating'}, inplace=True)

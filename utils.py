@@ -139,3 +139,14 @@ def get_confusion_matrix_file_name(dataset_name, label_name, classifier_name):
     return str(
         './results/' + conf.data_root + '/confusion_matrix/' + dataset_name + '_' + label_name + '_inference_' +
         classifier_name + '.txt')
+
+
+def get_obfuscation_method(current_label):
+    """
+    Get obfuscation method
+    :param current_label: the current classification label
+    :return:
+    """
+    if conf.obfuscated_method == conf.obfuscation_path[3]:
+        return str(conf.obfuscated_method + current_label + '/')
+    return conf.obfuscated_method

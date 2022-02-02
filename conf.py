@@ -120,9 +120,9 @@ dataset_names = [
 ]
 
 required_experiments = {
-    'observation': False,
+    'observation': True,
     'embeddings': True,
-    'recs': False
+    'recs': True
 }
 
 required_obfuscated = {
@@ -134,10 +134,11 @@ required_obfuscated = {
 obfuscation_path = [
     'pred/',
     'avg/',
-    'filtered/'
+    'filtered/',
+    'fairgo/'
 ]
 
-obfuscation_method_index = 2
+obfuscation_method_index = 3
 
 obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
 
