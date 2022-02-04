@@ -1,4 +1,5 @@
-original,0.829594017094017
-PerBlur pred,0.8149184149184149
-PerBlur avg,0.8072163947163947
-filtered,0.6723970473970474
+bprmf original,0.5
+bprmf PerBlur pred,0.5
+bprmf PerBlur avg,0.5
+bprmf fairgo,0.4927641802641803
+bprmf filtered,0.5
