@@ -120,15 +120,15 @@ dataset_names = [
 ]
 
 required_experiments = {
-    'observation': True,
-    'embeddings': True,
+    'observation': False,
+    'embeddings': False,
     'recs': True
 }
 
 required_obfuscated = {
-    'observation': True,
-    'embeddings': True,
-    'recs': True
+    'observation': False,
+    'embeddings': False,
+    'recs': False
 }
 
 obfuscation_path = [
