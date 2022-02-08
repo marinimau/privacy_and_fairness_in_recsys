@@ -1,5 +1,5 @@
-bprmf original,0.5
-bprmf PerBlur pred,0.5
-bprmf PerBlur avg,0.5
-bprmf fairgo,0.5
-bprmf filtered,0.5
+wrmf original,0.6476849125073623
+wrmf PerBlur pred,0.5409419945661467
+wrmf PerBlur avg,0.5409419945661467
+wrmf fairgo,0.4835293447076929
+wrmf filtered,0.5
