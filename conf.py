@@ -120,15 +120,15 @@ dataset_names = [
 ]
 
 required_experiments = {
-    'observation': False,
-    'embeddings': False,
+    'observation': True,
+    'embeddings': True,
     'recs': True
 }
 
 required_obfuscated = {
-    'observation': False,
-    'embeddings': False,
-    'recs': False
+    'observation': True,
+    'embeddings': True,
+    'recs': True
 }
 
 obfuscation_path = [
@@ -138,11 +138,11 @@ obfuscation_path = [
     'fairgo/'
 ]
 
-obfuscation_method_index = 3
+obfuscation_method_index = 0
 
 obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
 
-label_names = ['age', 'gender']
+label_names = ['age']  # , 'gender']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
 
