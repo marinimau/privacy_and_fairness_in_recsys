@@ -147,6 +147,8 @@ def get_obfuscation_method(current_label):
     :param current_label: the current classification label
     :return:
     """
-    if conf.obfuscated_method == conf.obfuscation_path[3]:
+    if conf.obfuscated_method == conf.obfuscation_path[3] \
+            or conf.obfuscated_method == conf.obfuscation_path[0]\
+            or conf.obfuscated_method == conf.obfuscation_path[1]:
         return str(conf.obfuscated_method + current_label + '/')
     return conf.obfuscated_method
