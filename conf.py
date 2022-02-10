@@ -138,7 +138,7 @@ obfuscation_path = [
     'fairgo/'
 ]
 
-obfuscation_method_index = 0
+obfuscation_method_index = 1
 
 obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
 
