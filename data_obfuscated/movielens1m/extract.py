@@ -15,7 +15,7 @@ def extract():
     Extract data from the response and generate tsv files.
     :return:
     """
-    data = pd.read_csv("./raw/ratings_obfuscated_avg.dat", sep='::', header=None, skipinitialspace=True)
+    data = pd.read_csv("./raw/age_ratings_obfuscated_avg.dat", sep='::', header=None, skipinitialspace=True)
     data.dropna(inplace=True)
     print(data.head())
     data.to_csv('ratings.tsv', sep='\t', index=False, header=None)
