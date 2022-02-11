@@ -120,8 +120,8 @@ dataset_names = [
 ]
 
 required_experiments = {
-    'observation': True,
-    'embeddings': True,
+    'observation': False,
+    'embeddings': False,
     'recs': True
 }
 
@@ -142,7 +142,7 @@ obfuscation_method_index = 1
 
 obfuscated_method = obfuscation_path[obfuscation_method_index] if required_obfuscated['observation'] else ''
 
-label_names = ['age']  # , 'gender']
+label_names = ['gender', 'age']
 
 age_labels = ['1', '56', '25', '45', '50', '35', '18']
 
