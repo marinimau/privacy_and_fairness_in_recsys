@@ -815,3 +815,6 @@ item-knn_embeddings,0,0
 most-pop_embeddings,0,0
 bprmf_embeddings,153.0242850780487,0.010364055633544922
 neumf_embeddings,0,0
+wrmf_embeddings,1368.2955570220947,0.035164833068847656
+lightgcn_embeddings,0,0
+multidae_embeddings,0,0
