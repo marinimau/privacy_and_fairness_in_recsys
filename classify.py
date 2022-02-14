@@ -38,13 +38,14 @@ def split_data(dff, test_size=0.3, random_state=698, preserve_order=False):
         return x_train, x_test, y_train, y_test
 
 
-def perform_classification(x_train, y_train, x_test, classifier_name):
+def perform_classification(x_train, y_train, x_test, classifier_name, pred_proba=False):
     """
     Make predictions with the given classifier
     :param x_train: the x of training set
     :param y_train: the y of the training set (label)
     :param x_test: the x of the test set
     :param classifier_name: the classifier
+    :param pred_proba: use predict_proba instead predict
     :return:
     """
     param_grid = conf.classifier_params[classifier_name]
@@ -57,7 +58,10 @@ def perform_classification(x_train, y_train, x_test, classifier_name):
     if conf.VERBOSE:
         print(grid_search.best_params_)
     start = time.time()
-    y_pred = grid_search.predict(x_test.values)
+    if pred_proba:
+        y_pred = grid_search.predict_proba(x_test.values)
+    else:
+        y_pred = grid_search.predict(x_test.values)
     end = time.time()
     prediction_time = end - start
     if conf.classifier_evaluation_plot:
