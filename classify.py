@@ -40,7 +40,7 @@ def split_data(dff, test_size=0.3, random_state=698, preserve_order=False):
 
 def perform_classification(x_train, y_train, x_test, classifier_name):
     """
-    Make predictions with LogisticRegression
+    Make predictions with the given classifier
     :param x_train: the x of training set
     :param y_train: the y of the training set (label)
     :param x_test: the x of the test set
